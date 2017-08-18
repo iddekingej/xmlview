@@ -15,9 +15,7 @@ class BulletList extends Widget
     {
         $this->theme->base_BulletList->listHeader();
         foreach($this->subItems as $l_item) {
-            $this->theme->base_BulletList->itemHeader();
             $l_item->display($p_store);
-            $this->theme->base_BulletList->itemFooter();
         }
         $this->theme->base_BulletList->listFooter();
     }

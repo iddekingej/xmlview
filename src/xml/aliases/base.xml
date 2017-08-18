@@ -1,9 +1,11 @@
 <aliases base="XMLView\Widgets\">
     <element name="infoTable"         value="Lists\InfoTable" />
     <element name="infoTableText"     value="Lists\InfoTableText" />
+    <element name="infoTableWidget"   value="Lists\InfoTableWidget"/>
     <element name="fragment"          value="Base\GUIFragment" />
     <element name="note"              value="Text\Note" />
     <element name="staticText"        value="Text\StaticText" />
     <element name="bulletList"        value="Lists\BulletList" />   
     <element name="dynamicBulletItem" value="Lists\DynamicBulletItem" />
+    <element name="textRouteLink"     value="Link\TextRouteLink" />
 </aliases>
