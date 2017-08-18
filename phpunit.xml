@@ -13,6 +13,7 @@
         <testsuite name="xmlviewTests">
             <directory suffix="Test.php"> ./tests/Base</directory>
             <directory suffic="Test.php"> ./tests/Parser</directory>
+            <directory suffic="Test.php"> ./tests/Data</directory>
         </testsuite>
      </testsuites>
 </phpunit>    
