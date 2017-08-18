@@ -1,0 +1,9 @@
+<aliases base="XMLView\Widgets\Form\">
+    <element name="form"         value="Form" />
+    <element name="formCheckBox" value="FormCheckBox" />
+    <element name="formFile"     value="FormFile" />
+    <element name="formPassword" value="FormPassword" />
+    <element name="formSection"  value="FormSection" />
+    <element name="formText"     value="FormText" />
+    <element name="formTextArea" value="FormTextArea" /> 
+</aliases>
