@@ -71,7 +71,7 @@ abstract class XMLClassParser
         return new XMLStatementWriter();
     }
     
-    public function parseXML(string $p_file)
+    public function parseXML(string $p_file,?ObjectNode $p_parent=null)
     {
         $this->setupHandlers();
         $l_dom = new \DOMDocument();
@@ -82,7 +82,7 @@ abstract class XMLClassParser
         $l_element->normalize();
         $this->checkTopNode($l_element);
         $this->writer=$this->createWriter();
-        $l_object=$this->createObject(null,$l_element);
+        $l_object=$this->createObject($p_parent,$l_element);
         
         $l_object->compile($this->writer);
         return $this->writer->getCode();

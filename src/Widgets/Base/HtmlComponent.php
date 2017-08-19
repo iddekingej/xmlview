@@ -7,6 +7,7 @@ namespace XMLView\Widgets\Base;
 use XMLView\Base\Base;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Base\Align;
+use XMLView\Engine\Data\DataLayer;
 
 /**
  * Base class of all HtmlComponents
@@ -39,7 +40,17 @@ abstract class HtmlComponent extends Base
     protected $containerWidth="100%";
     protected $containerHeight="100%";
     protected $containerAlign=Align::LEFT;
+    private $dataLayer;
     
+    function setDataLayer(DataLayer $p_dataLayer)
+    {
+        $this->dataLayer=$p_dataLayer;
+    }
+    
+    function getDataLayer():?DataLayer
+    {
+        return $this->dataLayer;
+    }
     
     function __construct()
     {
@@ -157,7 +168,7 @@ abstract class HtmlComponent extends Base
      * @return array
      */
     
-    function getJs():array
+    function getJs(DataStore $p_store):array
     {
         return [];
     }
@@ -165,7 +176,7 @@ abstract class HtmlComponent extends Base
      * Get all css used by component
      * @return array
      */
-    function getCss():array
+    function getCss(DataStore $p_store):array
     {
         return [];
     }

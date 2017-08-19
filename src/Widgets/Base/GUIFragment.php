@@ -5,6 +5,7 @@ namespace XMLView\Widgets\Base;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Sizer\VerticalSizer;
+use XMLView\Base\SubSizer;
 
 
 /**
@@ -13,8 +14,9 @@ use XMLView\Widgets\Sizer\VerticalSizer;
  */
 class GUIFragment extends Widget{
     
-    private $top;
+    use SubSizer;
     
+   
     /**
      * Set up default size of all sub widget
      */
@@ -24,16 +26,6 @@ class GUIFragment extends Widget{
         $this->top=new VerticalSizer();
     }
     
-    /**
-     * Add child widget
-     *      
-     * @return \XMLView\HtmlComponent child widge
-     */
-    function add(HtmlComponent $p_child){
-        $this->top->add($p_child);
-        $p_child->setParent($this);
-        return $p_child;
-    }
     
     /**
      * Display all content 

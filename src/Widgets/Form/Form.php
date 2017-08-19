@@ -9,6 +9,7 @@ use XMLView\Engine\Data\DynamicValue;
 use XMLView\Engine\Data\MapData;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Base\HtmlComponent;
+use XMLView\Engine\Data\DataLayer;
 
 
 
@@ -27,7 +28,7 @@ class Form extends Widget
     protected $cancelUrl;
     protected $saveText;
     protected $cancelText;
-    protected $data=[];
+    protected $data=null;
     protected $errors;
     private $elements=[];
     private $hidden=[];
@@ -77,10 +78,9 @@ class Form extends Widget
     
     /**
      * Get the JS used by form
-     * {@inheritDoc}
-     * @see \XMLView\HtmlComponent::getJs()
+
      */
-    function getJs():array
+    function getJs(DataStore $p_store):array
     {
         return ["/js/form.js"];
     }

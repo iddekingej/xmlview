@@ -8,7 +8,7 @@ use XMLView\Engine\Data\DataLayer;
 
 abstract class Widget extends HtmlComponent
 {
-    private $dataLayer;
+
     
     function getAttValue(string $p_name,DataStore $p_store,string $p_type="",bool $p_mandatory=false)
     {
@@ -42,22 +42,14 @@ abstract class Widget extends HtmlComponent
         return $l_realValue;
     }
     
-    function setDataLayer(DataLayer $p_dataLayer)
-    {
-        $this->dataLayer=$p_dataLayer;
-    }
-    
-    function getDataLayer():?DataLayer
-    {
-        return $this->dataLayer;
-    }
+
     
     abstract function displayContent(DataStore $p_store);
     
     final function display(DataStore $p_store)
     {
-        if($this->dataLayer){
-            $l_store=$this->dataLayer->processData($p_store);
+        if($this->getDataLayer()){
+            $l_store=$this->getDataLayer()->processData($p_store);
         } else {
             $l_store=$p_store;
         }

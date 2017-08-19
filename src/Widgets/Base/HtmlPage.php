@@ -4,24 +4,39 @@ namespace XMLView\Widgets\Base;
 
 use Illuminate\Support\ViewErrorBag;
 use XMLView\Engine\Data\DataStore;
+use XMLView\Widgets\Sizer\VerticalSizer;
+use XMLView\Base\SubSizer;
+use XMLView\Engine\Data\DynamicValue;
 /**
  * HtmlPage object 
  *
  */
 abstract class HtmlPage extends HtmlComponent
 {
+    use SubSizer;
     protected $theme;
     protected $title;
     protected $extraCss=[];
     protected $extraJs=[];
     private $errors;
     
+    
     function __construct()
     {
         $this->theme=new Theme();
+        $this->setTop(new VerticalSizer());
+    }
+    
+    function setTitle(DynamicValue $p_title)
+    {
+        $this->title=$p_title;
     }
     
     
+    function getTitle():?DynamicValue
+    {
+        return $this->title;
+    }
     final function setErrors(?ViewErrorBag $p_errors):void
     {
         $this->errors=$p_errors;
@@ -47,7 +62,7 @@ abstract class HtmlPage extends HtmlComponent
      */
     
     
-    protected abstract function content(?DataStore $p_store=null):void;
+    protected abstract function content():void;
 
     /**
      * Setup page. This is called before the page HTML is produced
@@ -61,7 +76,7 @@ abstract class HtmlPage extends HtmlComponent
      * This is called after the header, but before content
      * This method should contain that product html before the content
      */
-    function preContent(?DataStore $p_store=null):void
+    function preContent(DataStore $p_store):void
     {
         
     }
@@ -69,7 +84,7 @@ abstract class HtmlPage extends HtmlComponent
     /**
      * Called after the "content"  content (footer).
      */
-    function postContent(?DataStore $p_store=null):void
+    function postContent(DataStore $p_store):void
     {
         
     }
@@ -79,11 +94,27 @@ abstract class HtmlPage extends HtmlComponent
      */
     final function display(DataStore $p_store):void
     {
+
         $this->setup();
-        $this->theme->page_Page->pageHeader($this->title,$this->extraJs,$this->extraCss);
-        $this->preContent($p_store);
-        $this->content($p_store);
-        $this->postContent($p_store);
+        $this->content();
+        if($this->getDataLayer()){
+            $l_store=$this->getDataLayer()->processData($p_store);
+        } else {
+            $l_store=$p_store;
+        }
+        if($this->title){
+            $l_title=$this->title->getValue($l_store);
+        } else {
+            $l_title="";
+        }
+
+        $l_js=array_unique(array_merge($this->getJs($l_store),$this->extraJs));
+        $l_css=array_unique(array_merge($this->getCss($l_store),$this->extraCss));
+        $this->theme->page_Page->pageHeader($l_title,$l_js,$l_css);
+        $this->preContent($l_store);
+        $this->top->display($l_store);
+        $this->postContent($l_store);
         $this->theme->page_Page->pageFooter();
     }
+    
 }

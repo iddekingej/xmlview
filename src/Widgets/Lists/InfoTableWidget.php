@@ -6,6 +6,7 @@ namespace XMLView\Widgets\Lists;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Widgets\Sizer\HorizontalSizer;
+use XMLView\Base\SubSizer;
 
 /**
  * An InfoTable item. 
@@ -13,13 +14,7 @@ use XMLView\Widgets\Sizer\HorizontalSizer;
  *
  */
 class InfoTableWidget extends InfoTableItem{
-    
-    /**
-     * Widget on the right size are added to this sizer
-     * 
-     * @var HorizontalSizer
-     */
-    private $top;
+    use SubSizer;
     
     
     /**
@@ -29,17 +24,7 @@ class InfoTableWidget extends InfoTableItem{
     function  __construct()
     {
         parent::__construct();
-        $this->top=new HorizontalSizer();
-    }
-    
-    /**
-     * Add a value widget.
-     * 
-     * @param Widget $p_widget This widget is added to a horizontal sizer 
-     */
-    function add(Widget $p_widget)
-    {
-        $this->top->add($p_widget);
+        $this->setTop(new HorizontalSizer());
     }
     
     /**
@@ -69,22 +54,5 @@ class InfoTableWidget extends InfoTableItem{
         $this->top->display($p_store);
     }
     
-    /**
-     * Get the JS files used  in this widget.
-     * @return array List of JS files used by this widget
-     */
-    function getJs():array
-    {
-        return $this->top->getJs();
-    }
-    
-    /**
-     * CSS files used by this widget
-     * @return array  Array of CSS files used by this widget. 
-     */
-    
-    function getCss():array
-    {
-        return $this->top->getCss();
-    }
+
 }

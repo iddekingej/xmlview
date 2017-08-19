@@ -12,7 +12,7 @@ class StatementWriterTest extends TestCase
         $l_parser=new XMLStatementWriter();
         $l_parser->setObjectAttribute('bla','xx', 'zzz');
         $l_code=$l_parser->getCode();
-        $this->assertEquals("\n\$this->gui->bla->setxx(new ".DynamicStaticValue::class."('zzz'));", $l_code);
+        $this->assertEquals("\n\$l_gui->bla->setxx(new ".DynamicStaticValue::class."('zzz'));", $l_code);
     }
     
     function testVar()

@@ -53,7 +53,7 @@ class XMLClassHandler extends Base implements XMLNodeHandler
     
     function createObject(?ObjectNode $p_parent,\DOMNode $p_node):ObjectNode
     {
-        if($this->parentClass && !($this->checkClass($p_parent->getClass(),$this->parentClass))){
+        if($this->parentClass && !($this->checkClass($p_parent->getClass(),$this->parentClass))){            
             throw new XMLParserException(__("Parent class is of type ':class' , but doesn't descent of super class ':super'",["class"=>$p_parent->getClass(),"super"=>$this->parentClass]), $p_node);
         }
         $l_node=$p_node->attributes->getNamedItem("type");

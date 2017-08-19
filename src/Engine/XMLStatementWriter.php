@@ -39,7 +39,7 @@ class XMLStatementWriter extends Base{
     function guiVar($p_name)
     {
         
-        return "\$this->gui->$p_name";
+        return "\$l_gui->$p_name";
     }
     
     
@@ -139,7 +139,6 @@ class XMLStatementWriter extends Base{
     
     function addReturn($p_name)
     {
-        $this->buffer .= $this->guiVar($p_name)."->setParent(\$l_parent);";
         $this->buffer .= "\n return ".$this->guiVar($p_name).";";
     }
     

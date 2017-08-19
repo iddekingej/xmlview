@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace XMLView\Base;
 
 use XMLView\Widgets\Base\HtmlComponent;
+use XMLView\Engine\Data\DataStore;
 
 /**
  * Trait used for elements with sub items
@@ -21,17 +22,27 @@ trait SubList{
         
     }
     
+    function getMyJs(DataStore $p_store):array
+    {
+        return [];
+    }
+    
+    function getMyCss(DataStore $p_store):array
+    {
+        return [];
+    }
+    
 /**
  * Collect Java script files used by subelements
  * These java script are included in the header of the page 
  * 
  * @return array List of javascript files
  */
-    function getJs():array
+    function getJs(DataStore $p_store):array
     {
-        $l_js=[];
+        $l_js=$this->getMyJs($p_store);
         foreach($this->subItems as $l_item){
-            $l_js=array_merge($l_js,$l_item->getJs());
+            $l_js=array_merge($l_js,$l_item->getJs($p_store));
         }
         return array_unique($l_js);
     }
@@ -42,11 +53,11 @@ trait SubList{
  * 
  * @return array Used css files
  */
-    function getCss():array
+    function getCss(DataStore $p_store):array
     {
-        $l_css=[];
+        $l_css=$this->getMyCss($p_store);
         foreach($this->subItems as $l_item){
-            $l_css=array_merge($l_css,$l_item->getCss());
+            $l_css=array_merge($l_css,$l_item->getCss($p_store));
         }
         return array_unique($l_css);
     }
@@ -67,6 +78,7 @@ trait SubList{
  * @return \App\Vc\Lib\HtmlComponent Is the same as $p_component
  */    
     function add(HtmlComponent $p_component){
+        
         $this->validateSubItem($p_component);
         $this->subItems[]=$p_component;
         $p_component->setParent($this);
