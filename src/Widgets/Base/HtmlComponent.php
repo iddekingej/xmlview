@@ -35,18 +35,48 @@ abstract class HtmlComponent extends Base
      * @var HtmlComponent
      */
     protected $parent;
+    /**
+     * Name of compontent
+     * @var string
+     */
     protected $name;
     
+    /**
+     * Width of sizer container in CSS units
+     * @var string     
+     */
     protected $containerWidth="100%";
+    /**
+     * Height of sizer container in CSS units.
+     * @var string
+     */
     protected $containerHeight="100%";
+    /**
+     * Alignment of component inside its sizer containt
+     * @var string
+     */
     protected $containerAlign=Align::LEFT;
+    
+    /**
+     * Data layer belonging of this component, can be null.
+     * 
+     * @var DataLayer
+     */
     private $dataLayer;
     
-    function setDataLayer(DataLayer $p_dataLayer)
+    /**
+     * Set data layer of component
+     * @param DataLayer $p_dataLayer
+     */
+    function setDataLayer(DataLayer $p_dataLayer):void
     {
         $this->dataLayer=$p_dataLayer;
     }
     
+    /**      
+     * 
+     * @return DataLayer|NULL Datalayer of page, when null the component doesn't have datalayer
+     */
     function getDataLayer():?DataLayer
     {
         return $this->dataLayer;
@@ -57,6 +87,12 @@ abstract class HtmlComponent extends Base
         $this->theme=Theme::new();
     }
     
+    /**
+     * Page to which this component belong
+     * 
+     * @return HtmlPage|NULL Page to which this component belongs or null when component
+     *                       doesn't has a page as parent.
+     */
     function getPage():?HtmlPage
     {
         if($this->parent){
@@ -85,12 +121,22 @@ abstract class HtmlComponent extends Base
         return $this->name;
     }
     
+    /**
+     * Set the parent of this component
+     * 
+     * @param HtmlComponent $p_parent
+     */
     function setParent(HtmlComponent $p_parent)
     {
         
         $this->parent=$p_parent;
     }
     
+    /**
+     * Get the parent component
+     * 
+     * @return HtmlComponent|NULL
+     */
     
     function getParent():?HtmlComponent
     {

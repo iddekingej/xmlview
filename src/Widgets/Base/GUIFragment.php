@@ -1,7 +1,6 @@
 <?php 
-
 namespace XMLView\Widgets\Base;
-
+//Depreacted!
 use XMLView\Engine\Data\DataStore;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Sizer\VerticalSizer;

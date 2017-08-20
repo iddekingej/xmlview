@@ -4,11 +4,29 @@ namespace XMLView\Widgets\Base;
 
 
 use XMLView\Engine\Data\DataStore;
-
+/**
+ * Base class of all widgets/components
+ * 
+ *
+ */
 abstract class Widget extends HtmlComponent
 {
 
-    
+    /**
+     * The attributes of a widget are dynamic, the can contain variables. To make this possible
+     * most attributes are of type DynamicData.  A dynamic data can be static, or is a variable or 
+     * it is a sequence of variables. This method calculates the real value of the attribute based on 
+     * data in p_store . The result is checked if it's the correct type     
+     * 
+     * @param string $p_name                          Name of the attribute.
+     * @param DataStore $p_store                      DataSource used for processing the DynamicData object
+     * @param string $p_type                          Type of expected result. When empty string, not value check is done.
+     * @param bool $p_mandatory                       When true Attribute must be set. 
+     * @throws UnkownAttributeException               Raised when attribute is unknown for this widget
+     * @throws EmptyAttributeException                Raised when p_madatory is set , but value is empty
+     * @throws InvalidAttributeValueException         Raised when 
+     * @return Real value of attribute
+     */
     function getAttValue(string $p_name,DataStore $p_store,string $p_type="",bool $p_mandatory=false)
     {
         $l_method="get${p_name}";
@@ -42,9 +60,19 @@ abstract class Widget extends HtmlComponent
     }
     
 
-    
+    /**
+     * Display the content
+     * 
+     * @param DataStore $p_store
+     */
     abstract function displayContent(DataStore $p_store);
     
+    
+    /**
+     * When the component has its own data layer, the new data set is calculated
+     * The value is passed to displayContent in which the components is displayed.
+     * 
+     */
     final function display(DataStore $p_store)
     {
         if($this->getDataLayer()){

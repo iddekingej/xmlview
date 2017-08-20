@@ -18,6 +18,9 @@ class Condition extends Widget{
     
     private $conditionValue;
     
+    /**
+     * Get all JS url's used by all it's child widgets 
+     */
     function getJs(DataStore $p_store)
     {
         if($this->conditionValue){
@@ -26,6 +29,9 @@ class Condition extends Widget{
         return [];
     }
     
+    /**
+     * Get all the CSS that is used by all it's child widgets
+     */
     function getCss(DataStore $p_store)
     {
         if($this->conditionValue){
@@ -34,6 +40,10 @@ class Condition extends Widget{
         return [];
     }
     
+    /**
+     * Set the condition value 
+     * @param DynamicValue $p_conditionValue Wraps a true value -childeren are displayed false- childer are not displayed
+     */
     function setConditionValue(DynamicValue $p_conditionValue):void
     {
         $this->conditionValue=$p_conditionValue;
