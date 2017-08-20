@@ -90,6 +90,15 @@ abstract class HtmlPage extends HtmlComponent
     }
     
     /**
+     * This is a temporary fix  and can be removed if all templates are moved to XML
+     * In this method application specific html is generated
+     */
+    function themeHeader()
+    {
+        
+    }
+    
+    /**
      * Display page
      */
     final function display(DataStore $p_store):void
@@ -112,6 +121,7 @@ abstract class HtmlPage extends HtmlComponent
         $l_css=array_unique(array_merge($this->getCss($l_store),$this->extraCss));
         $this->theme->page_Page->pageHeader($l_title,$l_js,$l_css);
         $this->preContent($l_store);
+        $this->themeHeader();
         $this->top->display($l_store);
         $this->postContent($l_store);
         $this->theme->page_Page->pageFooter();

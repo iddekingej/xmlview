@@ -6,5 +6,5 @@ use XMLView\Engine\XMLStatementWriter;
 
 abstract class Node
 {
-    abstract function compile(XMLStatementWriter $p_writer):void;
+    abstract function compile(XMLStatementWriter $p_writer):void;   
 }

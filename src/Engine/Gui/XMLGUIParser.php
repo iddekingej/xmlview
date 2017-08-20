@@ -4,7 +4,6 @@ namespace XMLView\Engine\Gui;
 
 use XMLView\Engine\XMLClassParser;
 use XMLView\Engine\XMLClassHandler;
-use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Base\HtmlComponent;
 use XMLView\Engine\Data\DataLayer;
 use XMLView\Widgets\Base\XMLResourcePage;
@@ -14,6 +13,11 @@ class XMLGUIParser extends XMLClassParser
     function checkTopNode(\DOMNode $p_node):void
     {
 
+    }
+    
+    function newParser():XMLClassParser
+    {
+        return new XMLGUIParser();
     }
     
     function setupHandlers()

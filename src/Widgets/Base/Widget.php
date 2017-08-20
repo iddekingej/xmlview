@@ -4,7 +4,6 @@ namespace XMLView\Widgets\Base;
 
 
 use XMLView\Engine\Data\DataStore;
-use XMLView\Engine\Data\DataLayer;
 
 abstract class Widget extends HtmlComponent
 {

@@ -31,14 +31,14 @@ class PageLoader extends Base
      * @return bool
      */
     static function getCompiled(string $p_source):string
-    {
-        $l_source=base_path(config("hr.xmlBasePath").$p_source);
-        $l_cached=base_path(config("hr.xmlCache").$p_source.".php");
+    {        
+        $l_source=xmlview_resourcePath($p_source);
+        $l_cached=xmlview_cachePath($p_source);
         if(static::canUseCached($l_source,$l_cached)){
             return $l_cached;
         }
         $l_parser=new XMLGUIParser();
-        $l_code=$l_parser->parseXML($l_source);
+        $l_code=$l_parser->parseXML($p_source);
         $l_path=dirname($l_cached);
         if(!file_exists($l_path)){
             mkdir($l_path,0777,true);

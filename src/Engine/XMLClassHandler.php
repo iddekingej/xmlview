@@ -53,8 +53,13 @@ class XMLClassHandler extends Base implements XMLNodeHandler
     
     function createObject(?ObjectNode $p_parent,\DOMNode $p_node):ObjectNode
     {
-        if($this->parentClass && !($this->checkClass($p_parent->getClass(),$this->parentClass))){            
-            throw new XMLParserException(__("Parent class is of type ':class' , but doesn't descent of super class ':super'",["class"=>$p_parent->getClass(),"super"=>$this->parentClass]), $p_node);
+        if($p_parent){
+            if ($this->parentClass && ! ($this->checkClass($p_parent->getClass(), $this->parentClass))) {
+                throw new XMLParserException(__("Parent class is of type ':class' , but doesn't descent of super class ':super'", [
+                    "class" => $p_parent->getClass(),
+                    "super" => $this->parentClass
+                ]), $p_node);
+            }
         }
         $l_node=$p_node->attributes->getNamedItem("type");
         if($l_node){
@@ -86,6 +91,23 @@ class XMLClassHandler extends Base implements XMLNodeHandler
         return  new ObjectNode($l_name,$l_class,$p_parent,$this->addMethod);
         
     }
+    
+    function processAST(?ObjectNode $p_parent,\DOMNode $p_node,ObjectNode $p_ast):void
+    {
+        if($p_parent){
+            if ($this->parentClass && ! ($this->checkClass($p_parent->getClass(), $this->parentClass))) {
+                throw new XMLParserException(__("Parent class is of type ':class' , but doesn't descent of super class ':super'", [
+                    "class" => $p_parent->getClass(),
+                    "super" => $this->parentClass
+                ]), $p_node);
+            }
+        }
+        $l_class=$p_ast->getClass();
+        if($this->baseClass && !($this->checkClass($l_class,$this->baseClass))){
+            throw new XMLParserException(__("Object is class ':class' , but doesn't descent from super class ':super' ",["class"=>$l_class,"super"=>$this->baseClass]), $p_node);
+        }
+    }
+    
     
     function isAttributeIgnored(string $p_name):bool
     {

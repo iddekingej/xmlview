@@ -53,9 +53,9 @@ class AliasManager extends Base
     static function loadAliases()
     {
         static::init();
-        $l_aliasFiles=array_merge(config("gui.aliasFiles"),static::$aliasFiles);
+        $l_aliasFiles=array_merge(xmlview_getAliasFiles(),static::$aliasFiles);
         foreach($l_aliasFiles as $l_fileName){
-            static::$parser->parse(base_path($l_fileName));
+            static::$parser->parse($l_fileName);
         }
     }
     

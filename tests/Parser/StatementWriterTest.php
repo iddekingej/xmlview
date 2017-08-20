@@ -1,11 +1,11 @@
 <?php 
-use Tests\TestCase;
+
+
 use XMLView\Engine\XMLStatementWriter;
 use XMLView\Engine\Data\DynamicStaticValue;
 use XMLView\Engine\Data\DynamicVarValue;
 
-
-class StatementWriterTest extends TestCase
+class StatementWriterTest extends XMLViewTest
 {
     function testStaticString()
     {

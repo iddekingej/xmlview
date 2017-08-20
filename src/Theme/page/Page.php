@@ -7,11 +7,12 @@ use XMLView\Widgets\Base\ThemeItem;
 //TODO move application specific layout to XML VC's
 class Page extends ThemeItem
 {
+    
     function pageHeader($p_title,Array $p_js,Array $p_css)
     {
 ?>
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,31 +35,15 @@ foreach($p_js as $l_js){
 }
 ?>
 </head>
-<body>
-	<div class="apptitle">
-		<table class="apptitle_table">
-			<tr>
-				<td class="apptitle_title"><?=__("Hiking routes")?></td>
-				<td class="apptitle_name">
-					<?php 
-					if(!\Auth::user()){
-						$this->textRouteLink("login",[],__("Login"),"buttonLink");
-						echo "&nbsp;|&nbsp;";
-						$this->textRouteLink("register",[],__("Register"),"buttonLink");
-					} else {
-					    $this->iconTextRouteLink("user.profile",[],Icons::USERSMALL,\Auth::user()->name,"buttonLink");
-					}
-                    ?>
-				</td>
-			</tr>
-		</table>
-	</div>
+<body>	
 <?php       
     }
+    
     function note($p_message)
     {
         ?><div class="page_hint"><?=$this->e($p_message)?></div><?php
     }
+    
     
     function pageFooter()
     {

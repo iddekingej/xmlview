@@ -13,12 +13,13 @@ class ObjectNode extends Node
     private $parameters=[];
     private $method;
     
+    
     function __construct(string $p_name,string $p_class,?ObjectNode $p_parent,string $p_method)
     {
         $this->name=$p_name;
         $this->class=$p_class;
         $this->parent=$p_parent;
-        $this->method=$p_method;
+        $this->method=$p_method;        
     }
     
     function setParameters(Array $p_parameters)
@@ -45,6 +46,7 @@ class ObjectNode extends Node
     {
         return $this->parent;
     }
+    
     
     function addChild(ObjectNode $p_child)
     {

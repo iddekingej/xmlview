@@ -130,7 +130,8 @@ class AliasParser extends Base{
      */
     function parse($p_file){
         $l_dom = new \DOMDocument();
-        if($l_dom->load($p_file)===false){
+        $l_file=xmlview_getAliasPath($p_file);
+        if($l_dom->load($l_file)===false){
             throw new XMLParserException(__("Invalid XML"),null);
         }
         $l_element = $l_dom->documentElement;

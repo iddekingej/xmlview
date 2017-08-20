@@ -9,7 +9,6 @@ use XMLView\Engine\Data\DynamicValue;
 use XMLView\Engine\Data\MapData;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Base\HtmlComponent;
-use XMLView\Engine\Data\DataLayer;
 
 
 
@@ -121,7 +120,7 @@ class Form extends Widget
     {
         $l_data=$this->data->getValue($p_store);
         foreach($l_data as $l_name=>&$l_value){
-            $l_value=old($l_name,$l_value);
+            $l_value=xmlview_old($l_name,$l_value);
         }
         return new MapData($p_store,$l_data);        
     }
