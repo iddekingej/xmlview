@@ -1,11 +1,22 @@
 <?php 
 namespace XMLView\Engine;
 
+/**
+ * when a semantic error is detected in the XML File
+ *
+ */
 class XMLParserException extends \Exception
 {
     private $node;
     private $fileName;
     
+    /**
+     * Set up exception 
+     * @param unknown $p_error      Error text
+     * @param \DOMNode $p_node      Node that causes the exception
+     * @param \Throwable $p_other   Other exception that causes this exception.
+     * @param string $p_fileName    File.
+     */
     function __construct($p_error,?\DOMNode $p_node,\Throwable $p_other=null,string $p_fileName="")
     {
         parent::__construct($p_error,0,$p_other);
@@ -17,7 +28,10 @@ class XMLParserException extends \Exception
     {
         $this->fileName=$p_fileName;
     }
-    
+    /**
+     * 
+     * @return string Error string
+     */
     function __toString()
     {
         $l_error=parent::__toString();

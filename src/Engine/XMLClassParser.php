@@ -11,7 +11,14 @@ abstract class XMLClassParser
 {
     private $handlers;
 
-    function addHandler($p_nodeName,XMLNodeHandler $p_handler)
+    /**
+     * For each node type (based on nameName) there is a node handler that converts the node 
+     * into a object
+     * 
+     * @param string $p_nodeName
+     * @param XMLNodeHandler $p_handler
+     */
+    function addHandler(string $p_nodeName,XMLNodeHandler $p_handler):void
     {
         $this->handlers[$p_nodeName]=$p_handler;
     }
@@ -48,7 +55,6 @@ abstract class XMLClassParser
     function createByFile(?ObjectNode $p_parent,string $p_fileName, XMLNodeHandler $p_handler,\DOMNode $p_node):ObjectNode
     {
         $l_parser=$this->newParser();
-        echo "**[$l_fullFileName]";
         $l_ast=$l_parser->parseXMLToAST($l_fullFileName,$p_parent);
         $p_handler->processAST($p_parent, $p_node, $l_ast);
         return $l_ast;
@@ -90,8 +96,23 @@ abstract class XMLClassParser
         return $l_newObject;
     }
     
+    /**
+     * Setup handlers for this parser
+     */
     abstract function setupHandlers();
+    
+    /**
+     * Check the top node
+     *  
+     * @param \DOMNode $p_node Top node
+     */
     abstract function checkTopNode(\DOMNode $p_node):void;
+    
+    /**
+     * Create a new parser. This is used when including another XML file.
+     * 
+     * @return XMLClassParser 
+     */
     abstract function newParser():XMLClassParser;
     
     function createWriter()
