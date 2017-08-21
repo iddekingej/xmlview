@@ -76,8 +76,7 @@ class Form extends Widget
     }
     
     /**
-     * Get the JS used by form
-
+     * Get the JS urls used by form
      */
     function getJs(DataStore $p_store):array
     {
@@ -85,11 +84,11 @@ class Form extends Widget
     }
     
     /**
-     * Add a form element to a form
+     * Add a form element to the form
      * 
-     * @param HtmlComponent $p_component
-     * @throws FormException
-     * @return HtmlComponent
+     * @param HtmlComponent $p_component  Element to add to the form 
+     * @throws FormException              When a invalid element is added tot the form or when the name of the form is empty
+     * @return HtmlComponent              Same as $p_component
      */
     function add(HtmlComponent $p_component):HtmlComponent
     {
@@ -171,14 +170,12 @@ class Form extends Widget
     
     /**
      * Display form
-     * {@inheritDoc}
-     * @see \XMLView\HtmlComponent::display()
-     */
+      */
     function displayContent(?DataStore $p_store=null)
     {        
         
         /**
-         * This code is needed for getting the error data to the 
+         * This next code is needed for getting the error data to the form
          */
         
        

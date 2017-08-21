@@ -8,5 +8,8 @@
     <element name="bulletList"        value="Lists\BulletList" />   
     <element name="dynamicBulletItem" value="Lists\DynamicBulletItem" />
     <element name="textRouteLink"     value="Link\TextRouteLink" />
-    <element name="page"              value="Base\XMLResourcePage" />    
+    <element name="page"              value="Base\XMLResourcePage" />
+    <element name="topMenu"           value="Menu\TopMenu" />
+    <element name="topMenuConfirmItem" value="Menu\TopMenuConfirmItem" />
+    <element name="topMenuTextItem"    value="Menu\TopMenuTextItem" />
 </aliases>

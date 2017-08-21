@@ -1,4 +1,8 @@
 <?php 
+function route($p_route,Array $p_params=[])
+{
+    return "http://".$p_route."?".http_build_query($p_params);
+}
 function xmlview_resourcePath($p_path)
 {
     return __DIR__."/resources/".$p_path;

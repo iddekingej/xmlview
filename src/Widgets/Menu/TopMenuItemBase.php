@@ -5,7 +5,7 @@ namespace XMLView\Widgets\Menu;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DynamicValue;
 
-class TopMenuItemBase extends Widget{
+abstract class TopMenuItemBase extends Widget{
     /**
      * Menu text displayed
      * @var DynamicValue
@@ -96,7 +96,7 @@ class TopMenuItemBase extends Widget{
     }
     
     /**
-     * Get the icon displayed at the fron of the menu item.
+     * Get the icon displayed at the front of the menu item.
      * When this value is null or getValue returns a empty string, no icon is displayed.
      *
      * @return DynamicValue|NULL

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace XMLView\Theme\Page;
 
-use App\Lib\Icons;
 use XMLView\Widgets\Base\ThemeItem;
 //TODO move application specific layout to XML VC's
 class Page extends ThemeItem

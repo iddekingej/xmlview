@@ -1,0 +1,3 @@
+<element type="@topMenu">
+    <element type="@topMenuTextItem" route="aa" params="${params}" text="some text" icon="xx.bb"/>
+</element>

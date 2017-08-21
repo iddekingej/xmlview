@@ -15,6 +15,7 @@
             <directory suffic="Test.php"> ./tests/Parser</directory>
             <directory suffic="Test.php"> ./tests/Data</directory>
             <directory suffic="Test.php"> ./tests/Form</directory>
+            <directory suffic="Test.php"> ./tests/Widgets</directory>
         </testsuite>
      </testsuites>
 </phpunit>    

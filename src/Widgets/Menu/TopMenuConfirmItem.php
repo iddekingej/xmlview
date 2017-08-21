@@ -26,7 +26,7 @@ class TopMenuConfirmItem extends TopMenuItemBase
     }
     
     /**
-     * Displayes the menu item.
+     * Displays the menu item.
      * The menu item is a text link to some given url. There can be a icon
      * in front of the url when the icon url is set.
      *
