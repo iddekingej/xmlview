@@ -57,8 +57,8 @@ class InfoTable extends Widget
         }
     }
     /**
-     * Displays the information table     
-     * @see \XMLView\HtmlComponent::display()
+     * This components displays a table.
+     * The column on the left contains labels and on the right are values.     
      */
     function displayContent(?DataStore $p_store)
     {

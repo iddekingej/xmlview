@@ -34,7 +34,7 @@ class Form extends Widget
     
     
     /**
-     * Setup form
+     * Setup  the form.
      * 
      * @param ViewErrorBag|null $p_errors Errors displayed in form (used after submit and return to form)
      */
