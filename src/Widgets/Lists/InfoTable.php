@@ -8,6 +8,7 @@ use XMLView\Engine\Data\DynamicValue;
 use XMLView\Widgets\Base\WrongWidgetTypeException;
 use XMLView\Base\SubList;
 use XMLView\Widgets\Base\HtmlComponent;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 /**
  * Displays a information table.
@@ -27,7 +28,7 @@ class InfoTable extends Widget
     function __construct()
     {
         parent::__construct();
-        $this->setContainerHeight("0px");
+        $this->setContainerHeight(new DynamicStaticValue("0px"));
     }
     
     /**

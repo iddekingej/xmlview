@@ -7,6 +7,7 @@ use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Base\WrongWidgetTypeException;
 use XMLView\Widgets\Base\HtmlComponent;
 use XMLView\Base\SubList;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 /**
  * 
@@ -23,9 +24,8 @@ class TopMenu extends Widget
      */
     function __construct()
     {
-        parent::__construct();
-        $this->setContainerWidth("100%");
-        $this->setContainerHeight("0px");
+        parent::__construct();        
+        $this->setContainerHeight(new DynamicStaticValue("0px"));
         
     }
  

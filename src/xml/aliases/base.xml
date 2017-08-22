@@ -12,4 +12,9 @@
     <element name="topMenu"           value="Menu\TopMenu" />
     <element name="topMenuConfirmItem" value="Menu\TopMenuConfirmItem" />
     <element name="topMenuTextItem"    value="Menu\TopMenuTextItem" />
+    <element name="leftMenu"           value="Menu\LeftMenu" />
+    <element name="menuGroup"          value="Menu\GroupMenu" />
+    <element name="textMenuItem"       value="Menu\TextMenuItem" />
+    <element name="horizontalSizer"    value="Sizer\HorizontalSizer" />
+    <element name="verticalSizer"      value="Sizer\VerticalSizer" />
 </aliases>

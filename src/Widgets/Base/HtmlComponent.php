@@ -8,6 +8,8 @@ use XMLView\Base\Base;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Base\Align;
 use XMLView\Engine\Data\DataLayer;
+use XMLView\Engine\Data\DynamicValue;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 /**
  * Base class of all HtmlComponents
@@ -45,12 +47,12 @@ abstract class HtmlComponent extends Base
      * Width of sizer container in CSS units
      * @var string     
      */
-    protected $containerWidth="100%";
+    protected $containerWidth;
     /**
      * Height of sizer container in CSS units.
      * @var string
      */
-    protected $containerHeight="100%";
+    protected $containerHeight;
     /**
      * Alignment of component inside its sizer containt
      * @var string
@@ -85,6 +87,8 @@ abstract class HtmlComponent extends Base
     function __construct()
     {
         $this->theme=Theme::new();
+        $this->setContainerWidth(new DynamicStaticValue("100%"));
+        $this->setContainerHeight(new DynamicStaticValue("100%"));
     }
     
     /**
@@ -149,7 +153,7 @@ abstract class HtmlComponent extends Base
      * 
      * @param string $p_width Container width is css units
      */
-    function setContainerWidth(string $p_width):void
+    function setContainerWidth(DynamicValue $p_width):void
     {
         $this->containerWidth=$p_width;
     }
@@ -158,7 +162,7 @@ abstract class HtmlComponent extends Base
      * Get the container(sizer) width.
      * @return string  Container width in css units
      */
-    function getContainerWidth():string
+    function getContainerWidth():?DynamicValue
     {
         return $this->containerWidth;
     }
@@ -166,7 +170,7 @@ abstract class HtmlComponent extends Base
      * Set container (sizer) height
      * @param string $p_height Container height in css units;
      */
-    function setContainerHeight(string $p_height):void
+    function setContainerHeight(DynamicValue $p_height):void
     {
         $this->containerHeight=$p_height;
     }
@@ -176,7 +180,7 @@ abstract class HtmlComponent extends Base
      * @return string Get the container height in css units.
      */
     
-    function getContainerHeight():string
+    function getContainerHeight():?DynamicValue
     {
         return $this->containerHeight;
     }

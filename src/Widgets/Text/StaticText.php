@@ -5,6 +5,7 @@ namespace XMLView\Widgets\Text;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Engine\Data\DynamicValue;
 use XMLView\Widgets\Base\Widget;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 /**
  * Displays a static text
@@ -40,8 +41,8 @@ class StaticText extends Widget
 
     function __construct()
     {
-        $this->setContainerHeight("");
-        $this->setContainerWidth("");
+        $this->setContainerHeight(new DynamicStaticValue(""));
+        $this->setContainerWidth(new DynamicStaticValue(""));
         parent::__construct();
     }
     
