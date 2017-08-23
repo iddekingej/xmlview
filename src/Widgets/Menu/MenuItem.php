@@ -15,12 +15,21 @@ abstract class MenuItem extends Widget
 {
     private $tag;
     
-
+/**
+ * The the current tag (This value is used for determine which 
+ * menu item is selected)
+ * 
+ * @param DynamicValue $p_tag Tag of the menu. This a string wrapped in a @see DynamicValue
+ */
     function setTag(DynamicValue $p_tag):void
     {
         $this->tag=$p_tag;
     }
-    
+ /**
+  * Get the tag of the menu item
+  * 
+  * @return DynamicValue|NULL
+  */  
     function getTag():?DynamicValue
     {
         return $this->tag;

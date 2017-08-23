@@ -1,6 +1,7 @@
 <?php 
 namespace XMLView\Engine;
 use XMLView\Engine\Parser\ObjectNode;
+use XMLView\Base\HashMap;
 
 /**
  * XML files uses a kind of 'bean' technology. Each node is converted to a object.
@@ -9,8 +10,34 @@ use XMLView\Engine\Parser\ObjectNode;
  */
 abstract class XMLClassParser
 {
+    /**
+     * Node handlers. 
+     * For each nodeName is a handler that translates the node to a object
+     * 
+     * @var XMLNodeHandler
+     */
     private $handlers;
-
+    
+    /**
+     * HashMap of name=>element translation
+     * @var HashMap
+     */
+    private $nameList;
+    
+    function __construct(?HashMap $p_nameList=null)
+    {
+        if($p_nameList === null){
+            $this->nameList=new HashMap();   
+        } else {
+            $this->nameList=$p_nameList;
+        }
+    }
+    
+    function getNameList():?HashMap
+    {
+        return $this->nameList;
+    }
+    
     /**
      * For each node type (based on nameName) there is a node handler that converts the node 
      * into a object
@@ -38,7 +65,7 @@ abstract class XMLClassParser
         for($l_cnt=0;$l_cnt < $l_length;$l_cnt++){
             $l_node=$l_attributes->item($l_cnt);
             $l_name=$l_node->name;
-            if(!$p_handler->isAttributeIgnored($l_name)){
+            if(!$p_handler->isAttributeIgnored($l_name) && $l_name != "file" && $l_name != "ref" && $l_name != "name"){
                 $l_parameters[$l_name]=$l_node->nodeValue;
             }
         }
@@ -74,15 +101,36 @@ abstract class XMLClassParser
             throw new XMLParserException(__("Unknow node ':name'",["name"=>$l_name]),$p_node);
         }
         $l_handler=$this->handlers[$l_name];
+        $l_ref=$p_node->attributes->getNamedItem("ref");
         $l_file=$p_node->attributes->getNamedItem("file");
-        if($l_file){
-            $l_newObject=$this->createByFile($p_parent,$l_file->nodeValue,$p_node);   
+        if($l_ref){
+            $l_refName=$l_ref->nodeValue;
+            if($this->nameList->has($l_refName)){
+                $l_newObject=$this->nameList->get($l_refName);
+            } else {
+                throw new XMLParserException(__("Element with name ':name' not found",["name"=>$l_refName]), $p_node);
+            }
         } else {
-            $l_newObject=$l_handler->createObject($p_parent,$p_node);
+            if ($l_file) {
+                $l_newObject = $this->createByFile($p_parent, $l_file->nodeValue, $p_node);
+            } else {
+                $l_newObject = $l_handler->createObject($p_parent, $p_node);
+            }
         }
-
+        $l_nameNode=$p_node->attributes->getNamedItem("name");
+        if($l_nameNode){
+            if($l_ref){
+                throw new XMLParserException(__("Name attribute not allowed when ref is used"), $p_node);
+            }
+            $l_name=$l_nameNode->nodeValue;
+            if($this->nameList->has($l_name)){
+                throw new XMLParserException(__("There is already a node with name ':name'",["name"=>$l_name]), $p_node);
+            } else {
+                $this->nameList->put($l_name, $l_newObject);
+            }
+        }
         $l_newObject->setParameters($this->parseAttributes($l_handler, $p_node));
-        if($p_parent !== null){
+        if($l_ref===null && ($p_parent !== null)){
             $p_parent->addChild($l_newObject);
         }
         $l_child = $p_node->firstChild;

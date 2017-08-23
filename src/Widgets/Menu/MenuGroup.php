@@ -23,17 +23,31 @@ class MenuGroup extends Widget
      */
     private $title;
     
+    /**
+     * Set the MenuGroup title (Title displayed in the menu)
+     * @param DynamicValue $p_title
+     */
     function setTitle(DynamicValue $p_title):void
     {
         $this->title=$p_title;
     }
     
+    /**
+     * Get the menu title
+     * 
+     * @return DynamicValue|NULL
+     */
     
     function getTitle():?DynamicValue
     {
         return $this->title;
     }
     
+    /**
+     * Get the menu object to which the menu group belongs
+     * 
+     * @return LeftMenu
+     */
     function getMenu():LeftMenu
     {
         return $this->getParent();
@@ -49,6 +63,12 @@ class MenuGroup extends Widget
         $this->subItems[]=$p_item;
     }
     
+    /**
+     * Get the current tag of the menu to which the group belongs.
+     * (Which menu is selected?)
+     * 
+     * @return DynamicValue|NULL
+     */
     function getCurrentTag():?DynamicValue
     {
         $l_menu=$this->getMenu();
@@ -81,6 +101,13 @@ class MenuGroup extends Widget
         $this->addItem(new LogoutMenuItem($p_tag));
     }
     
+    /**
+     * When a child is added to the menu group, this
+     * method determines if the widget is a MenuItem) 
+     * 
+     * @param HtmlComponent $p_component
+     * @throws WrongWidgetTypeException
+     */
     function validateSubItem(HtmlComponent $p_component)
     {
         if(!($p_component instanceof MenuItem)){
@@ -89,10 +116,12 @@ class MenuGroup extends Widget
     }
     
     /**
-     * Display the menu group
+     * Displays the menu group.
+     * First the title is displayed, then all menu items (the children of the menu group)
+     * are printed  below the group title.
+     * When the menu item has the same tag value as the currentTag of the menu,
+     * the menu item is highlighted (to indicate which menu item is selected)
      * 
-     * {@inheritDoc}
-     * @see \App\Vc\Lib\HtmlComponent::display()
      */
     function displayContent(DataStore $p_store):void
     {

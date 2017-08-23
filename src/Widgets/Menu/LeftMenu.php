@@ -22,7 +22,13 @@ class LeftMenu extends Widget
      * @var unknown
      */
     private $currentTag;
-    
+
+    /**
+     * Check if  child element is a @see MenuGroup
+     * 
+     * @param HtmlComponent $p_component    Child component added to the @see LeftMenu
+     * @throws WrongWidgetTypeException     Whe component is invalid (not a MenuGroup)
+     */
     function validateSubItem(HtmlComponent $p_component)
     {
         if(!($p_component instanceof MenuGroup)){
@@ -32,7 +38,7 @@ class LeftMenu extends Widget
    
     
     /**
-     * Set the "CurrentTag'. The menu element with this tag is higlighted to indicate the current selected
+     * Set the "CurrentTag'. The menu element with this tag is highlighted to indicate the current selected
      * menu item
      * @param unknown $p_currentTag
      */
@@ -41,6 +47,12 @@ class LeftMenu extends Widget
     {
         $this->currentTag=$p_currentTag;
     }
+    
+    /**
+     * Current tag (=Current selected page)
+     * @return DynamicValue|NULL Tag of the current selected page
+     *                            This value contains a string wrapped in a DynamicValue
+     */
     
     function getCurrentTag():?DynamicValue
     {

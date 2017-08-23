@@ -6,14 +6,15 @@ use XMLView\Widgets\Base\HtmlComponent;
 use XMLView\Engine\Data\DataStore;
 
 /**
- * Trait used for elements with sub items
+ * Trait used for elements with one or more sub items
  */
 
 trait SubList{
     protected $subItems=[];
     
     /**
-     * Function used for checking the widget when added to the parent
+     * When a child widget is added to this component the element is checked 
+     * in this method
      *  
      * @param HtmlComponent $p_compontent Check this widget
      */
@@ -36,7 +37,7 @@ trait SubList{
  * Collect Java script files used by subelements
  * These java script are included in the header of the page 
  * 
- * @return array List of javascript files
+ * @return array List of Javascript files
  */
     function getJs(DataStore $p_store):array
     {

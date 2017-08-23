@@ -15,4 +15,9 @@ class DynamicStaticValue implements DynamicValue
     {
         return $this->value;
     }
+    
+    function getStaticValue()
+    {
+        return $this->value;
+    }
 }

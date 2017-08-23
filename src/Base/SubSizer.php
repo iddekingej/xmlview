@@ -6,7 +6,8 @@ use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DataStore;
 
 /**
- * An element contains a sizer to which sub element is added to
+ * This is a trait for widget to contain one sub element.
+ * This sub element is a sizer that can contain one or more children.
  *
  */
 trait SubSizer
