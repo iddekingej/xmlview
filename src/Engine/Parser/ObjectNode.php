@@ -24,7 +24,7 @@ class ObjectNode extends Node
     
     function setParameters(Array $p_parameters)
     {
-        $this->parameters=$p_parameters;
+        $this->parameters=array_merge($this->parameters,$p_parameters);
     }
     
     function getParameters()

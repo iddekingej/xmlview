@@ -1,0 +1,4 @@
+<element type="@verticalSizer">
+    <element name="x1" type="@staticText"/>
+    <element ref="x1" text="Bla"/>
+</element>

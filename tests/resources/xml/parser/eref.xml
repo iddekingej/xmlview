@@ -1,0 +1,6 @@
+<element type="@verticalSizer">
+    <element name="x1" type="@staticText"/>
+    <element type="@verticalSizer">
+        <element name="x1" type="@staticText"/>
+    </element>
+</element>

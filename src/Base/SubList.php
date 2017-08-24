@@ -4,6 +4,7 @@ namespace XMLView\Base;
 
 use XMLView\Widgets\Base\HtmlComponent;
 use XMLView\Engine\Data\DataStore;
+use XMLView\Widgets\Base\Widget;
 
 /**
  * Trait used for elements with one or more sub items
@@ -43,7 +44,9 @@ trait SubList{
     {
         $l_js=$this->getMyJs($p_store);
         foreach($this->subItems as $l_item){
-            $l_js=array_merge($l_js,$l_item->getJs($p_store));
+            if($l_item->evaluateVisibility($p_store)){
+                $l_js=array_merge($l_js,$l_item->getJs($p_store));
+            }
         }
         return array_unique($l_js);
     }
@@ -58,7 +61,9 @@ trait SubList{
     {
         $l_css=$this->getMyCss($p_store);
         foreach($this->subItems as $l_item){
-            $l_css=array_merge($l_css,$l_item->getCss($p_store));
+            if($l_item->evaluateVisibility($p_store)){
+                $l_css=array_merge($l_css,$l_item->getCss($p_store));
+            }
         }
         return array_unique($l_css);
     }
@@ -84,5 +89,26 @@ trait SubList{
         $this->subItems[]=$p_component;
         $p_component->setParent($this);
         return $p_component;
+    }
+    
+    function preDisplaySub(DataStore $p_store,Widget $p_item):void
+    {
+        
+    }
+    
+    function postDisplaySub(DataStore $p_store,Widget $p_item):void
+    {
+        
+    }
+    
+    function displaySub(DataStore $p_store):void
+    {
+        foreach($this->subItems as $l_item){
+            if($l_item->evaluateVisibility($p_store)){
+                $this->preDisplaySub($p_store,$l_item);
+                $l_item->display($p_store);
+                $this->postDisplaySub($p_store,$l_item);
+            }
+        }
     }
 }

@@ -66,8 +66,6 @@ class LeftMenu extends Widget
      */
     function displayContent(DataStore $p_store):void
     {
-        foreach($this->subItems as $l_group){
-            $l_group->display($p_store);
-        }
+        $this->displaySub($p_store);
     }
 }

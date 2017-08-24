@@ -1,2 +1,2 @@
 <!-- used for testing 'file' attribute -->
-<element type='@staticText' text='bla' />
+<element name="xx" type='@staticText' />

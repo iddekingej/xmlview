@@ -115,6 +115,43 @@ class MenuGroup extends Widget
         }
     }
     
+   
+    function preDisplaySub(DataStore $p_store,Widget $p_item)
+    {
+        $l_tagValue="";
+        $l_tag=$p_item->getTag();
+        $l_currentTagValue="";
+        $l_currentTag=$this->getCurrentTag();
+        if($l_currentTag){
+            $l_currentTagValue=$l_currentTag->getValue($p_store);
+        }
+        if($l_tag){
+            $l_tagValue=$l_tag->getValue($p_store);
+        }
+
+        if($l_tagValue == $l_currentTagValue){
+            $this->theme->menu_LeftMenu->selectedMenu();
+        }
+    }
+    
+    function postDisplaySub(DataStore $p_store,Widget $p_item)
+    {
+        $l_tagValue="";
+        $l_tag=$p_item->getTag();
+        $l_currentTagValue="";
+        $l_currentTag=$this->getCurrentTag();
+        if($l_currentTag){
+            $l_currentTagValue=$l_currentTag->getValue($p_store);
+        }
+        if($l_tag){
+            $l_tagValue=$l_tag->getValue($p_store);
+        }
+        
+        if($l_tagValue == $l_currentTagValue){
+            $this->theme->menu_LeftMenu->selectedMenuFooter();
+        }
+    }
+    
     /**
      * Displays the menu group.
      * First the title is displayed, then all menu items (the children of the menu group)
@@ -125,32 +162,9 @@ class MenuGroup extends Widget
      */
     function displayContent(DataStore $p_store):void
     {
-        $l_currentTagValue="";
-        $l_currentTag=$this->getCurrentTag();
-        
-        if($l_currentTag){
-            $l_currentTagValue=$l_currentTag->getValue($p_store);
-        }
-        
         $l_title=$this->getAttValue("title", $p_store,"string",true);
         
         $this->theme->menu_LeftMenu->menuGroup($l_title);
-        foreach($this->subItems as $l_item){
-            $l_tagValue="";
-            $l_tag=$l_item->getTag();
-            if($l_tag){
-                $l_tagValue=$l_tag->getValue($p_store);
-            }
-            
-            if($l_tagValue == $l_currentTagValue){
-                $this->theme->menu_LeftMenu->selectedMenu();
-            }
-            
-            $l_item->display($p_store);
-            
-            if($l_tagValue == $l_currentTagValue){
-                $this->theme->menu_LeftMenu->selectedMenuFooter();
-            }
-        }
+        $this->displaySub($p_store);
     }
 }

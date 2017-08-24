@@ -65,7 +65,7 @@ abstract class XMLClassParser
         for($l_cnt=0;$l_cnt < $l_length;$l_cnt++){
             $l_node=$l_attributes->item($l_cnt);
             $l_name=$l_node->name;
-            if(!$p_handler->isAttributeIgnored($l_name) && $l_name != "file" && $l_name != "ref" && $l_name != "name"){
+            if(!$p_handler->isAttributeIgnored($l_name) && $l_name != "file" && $l_name != "ref" ){
                 $l_parameters[$l_name]=$l_node->nodeValue;
             }
         }
@@ -82,7 +82,7 @@ abstract class XMLClassParser
     function createByFile(?ObjectNode $p_parent,string $p_fileName, XMLNodeHandler $p_handler,\DOMNode $p_node):ObjectNode
     {
         $l_parser=$this->newParser();
-        $l_ast=$l_parser->parseXMLToAST($l_fullFileName,$p_parent);
+        $l_ast=$l_parser->parseXMLToAST($p_fileName,$p_parent);
         $p_handler->processAST($p_parent, $p_node, $l_ast);
         return $l_ast;
     }
@@ -112,7 +112,7 @@ abstract class XMLClassParser
             }
         } else {
             if ($l_file) {
-                $l_newObject = $this->createByFile($p_parent, $l_file->nodeValue, $p_node);
+                $l_newObject = $this->createByFile($p_parent, $l_file->nodeValue,$l_handler, $p_node);
             } else {
                 $l_newObject = $l_handler->createObject($p_parent, $p_node);
             }

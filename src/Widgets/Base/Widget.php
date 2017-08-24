@@ -4,6 +4,7 @@ namespace XMLView\Widgets\Base;
 
 
 use XMLView\Engine\Data\DataStore;
+use XMLView\Engine\Data\DynamicValue;
 /**
  * Base class of all widgets/components
  * 
@@ -12,6 +13,8 @@ use XMLView\Engine\Data\DataStore;
 abstract class Widget extends HtmlComponent
 {
 
+    private $visible;
+    
     /**
      * The attributes of a widget are dynamic, the can contain variables. To make this possible
      * most attributes are of type DynamicData.  A dynamic data can be static, or is a variable or 
@@ -58,8 +61,31 @@ abstract class Widget extends HtmlComponent
         
         return $l_realValue;
     }
+    /**
+     * Set visibility flag. This should be a boolean wrapped in a DynamicValue
+     * If visible is null or DynamicValue evaluated to true the widget is displayed
+     *  
+     * @param DynamicValue $p_flag   Indicates if component is displayed
+     */
+    function setVisible(DynamicValue $p_flag):void
+    {
+        $this->visible=$p_flag;
+    }
     
-
+    function getVisible():?DynamicValue
+    {
+        return $this->visible;
+    }
+    
+    function evaluateVisibility(DataStore $p_store):bool
+    {
+        $l_value=$this->getAttValue("visible", $p_store,"boolean",false);
+        if($l_value === null){
+            return true;
+        }
+        return $l_value;
+    }
+    
     /**
      * Display the content
      * 

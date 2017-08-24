@@ -1,1 +1,3 @@
-<element file='inc.xml' />
+<element file='inc.xml' >
+    <element ref="xx" text='bla'/> 
+</element>
