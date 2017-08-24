@@ -13,8 +13,9 @@
     <element name="topMenuConfirmItem" value="Menu\TopMenuConfirmItem" />
     <element name="topMenuTextItem"    value="Menu\TopMenuTextItem" />
     <element name="leftMenu"           value="Menu\LeftMenu" />
-    <element name="menuGroup"          value="Menu\GroupMenu" />
+    <element name="menuGroup"          value="Menu\MenuGroup" />
     <element name="textMenuItem"       value="Menu\TextMenuItem" />
+    <element name="logoutMenuIem"      value="Menu\LogoutMenuItem" />
     <element name="horizontalSizer"    value="Sizer\HorizontalSizer" />
     <element name="verticalSizer"      value="Sizer\VerticalSizer" />
 </aliases>
