@@ -30,13 +30,20 @@ function csrf_token()
 
 function __(string $p_text,array $p_params=[]):string
 {
-    $l_replace=[];
-    $l_by=[];
-    foreach($p_params as $l_name=>$l_value){
-        $l_replace[]=":$l_name";
-        $l_by[]=$l_value;
+    preg_match_all("#[\:][a-zA-Z0-9_]+#",$p_text,$l_matches,PREG_SET_ORDER|PREG_OFFSET_CAPTURE);
+    $l_prv=0;
+    $l_return="";
+    if(is_array($l_matches)){
+        foreach($l_matches as $l_data){
+            $l_name=substr($l_data[0][0],1);
+            $l_pos= $l_data[0][1];
+            $l_return .= substr($p_text,$l_prv,$l_pos-$l_prv);            
+            $l_return .= $p_params[$l_name];
+            $l_prv=$l_pos+strlen($l_name)+1;
+        }
+       $l_return .= substr($p_text,$l_prv);
     }
-    return str_replace($l_replace,$l_by,$p_text);
+    return $l_return;
 }
 
 function xmlview_old($p_name,$p_default){

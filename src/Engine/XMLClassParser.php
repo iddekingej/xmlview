@@ -2,6 +2,7 @@
 namespace XMLView\Engine;
 use XMLView\Engine\Parser\ObjectNode;
 use XMLView\Base\HashMap;
+use XMLView\Engine\Alias\AliasManager;
 
 /**
  * XML files uses a kind of 'bean' technology. Each node is converted to a object.
@@ -50,6 +51,16 @@ abstract class XMLClassParser
         $this->handlers[$p_nodeName]=$p_handler;
     }
     
+    private function checkAttributes(string $p_className,Array $p_attributes,\DOMNode $p_node)
+    {
+        $l_reflection=new \ReflectionClass($p_className);
+        foreach($p_attributes as $l_attribute=>$l_value){
+            if(!$l_reflection->hasMethod("set${l_attribute}")){
+                throw new AttributeDoesntExists($p_className, $l_attribute, $p_node);
+            }
+        }
+    }
+    
     /**
      * Attributes of the XML set the attributes of an object except special attributes
      * filtered out by a call to isAttrubuteIgnored
@@ -96,11 +107,32 @@ abstract class XMLClassParser
      */
     private function createObject(?ObjectNode $p_parent,\DOMNode $p_node):ObjectNode
     {
+        $l_alias = null;
+        $l_name  =  
         $l_name=$p_node->nodeName;
-        if(!isset($this->handlers[$l_name])){
-            throw new XMLParserException(__("Unknow node ':name'",["name"=>$l_name]),$p_node);
+        if(AliasManager::hasAlias($l_name)){
+            $l_alias=AliasManager::getAlias($l_name);
+            $l_type=$l_alias->getType();
+        } else {
+            $l_type=$l_name;
         }
-        $l_handler=$this->handlers[$l_name];
+        
+        if(!isset($this->handlers[$l_type])){
+            throw new XMLParserException(__("Unknow node ':name'",["name"=>$l_name]),$p_node);
+        } else {
+            $l_handler=$this->handlers[$l_type];            
+        }
+        
+        /**
+         * Create the AST for the for the node.
+         * 
+         * The following situation are possible:
+         * Normal   - Just just XMLNodeHanlder::createObject
+         * File     - (include) Parse file and return AST
+         * Ref      - Component is already defined elsewhere
+         * 
+         */
+        
         $l_ref=$p_node->attributes->getNamedItem("ref");
         $l_file=$p_node->attributes->getNamedItem("file");
         if($l_ref){
@@ -114,9 +146,18 @@ abstract class XMLClassParser
             if ($l_file) {
                 $l_newObject = $this->createByFile($p_parent, $l_file->nodeValue,$l_handler, $p_node);
             } else {
-                $l_newObject = $l_handler->createObject($p_parent, $p_node);
+                $l_newObject = $l_handler->createObject($l_alias,$p_parent, $p_node);
             }
         }
+        
+        /**
+         * Set the name of the component. 
+         * Checks if the name already exists.
+         * A object that's a ref can't have a name (because it has already a name).
+         * 
+         * @var string $l_nameNode
+         */
+        
         $l_nameNode=$p_node->attributes->getNamedItem("name");
         if($l_nameNode){
             if($l_ref){
@@ -129,7 +170,18 @@ abstract class XMLClassParser
                 $this->nameList->put($l_name, $l_newObject);
             }
         }
-        $l_newObject->setParameters($this->parseAttributes($l_handler, $p_node));
+        
+        /**
+         * The object attributes are set by the attributes of the @see DOMNode
+         * First the attributes are retrieved, checked if they exists the then 
+         * the parameters are set in the AS Object
+         * 
+         * @var array $l_attributes
+         */
+        
+        $l_attributes=$this->parseAttributes($l_handler, $p_node);
+        $this->checkAttributes($l_newObject->getClass(), $l_attributes, $p_node);
+        $l_newObject->setParameters($l_attributes);
         if($l_ref===null && ($p_parent !== null)){
             $p_parent->addChild($l_newObject);
         }

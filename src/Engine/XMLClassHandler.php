@@ -6,6 +6,7 @@ use XMLView\Base\Base;
 use XMLView\Engine\Parser\ObjectNode;
 use XMLView\Engine\Alias\AliasManager;
 use XMLView\Engine\Alias\AliasList;
+use XMLView\Engine\Alias\AliasItem;
 
 class XMLClassHandler extends Base implements XMLNodeHandler
 {
@@ -51,7 +52,7 @@ class XMLClassHandler extends Base implements XMLNodeHandler
      * @param string             $p_method  Method function of parent used for added the new object
      */
     
-    function createObject(?ObjectNode $p_parent,\DOMNode $p_node):ObjectNode
+    function createObject(?AliasItem $p_alias,?ObjectNode $p_parent,\DOMNode $p_node):ObjectNode
     {
         if($p_parent){
             if ($this->parentClass && ! ($this->checkClass($p_parent->getClass(), $this->parentClass))) {
@@ -63,8 +64,14 @@ class XMLClassHandler extends Base implements XMLNodeHandler
         }
         $l_node=$p_node->attributes->getNamedItem("type");
         if($l_node){
-            $l_class=$l_node->nodeValue;
+            if($p_alias){
+                throw new XMLParserException(__("Type attribute can't be used because node(:node) is a alias",["node"=>$p_node->nodeName]), $p_node);
+            }
+            $l_class=$l_node->nodeValue;           
+        } else if($p_alias){
+            $l_class=$p_alias->getClass();
         } else {
+        
             if($this->defaultClass){
                 $l_class=$this->defaultClass;
             } else {
@@ -72,7 +79,8 @@ class XMLClassHandler extends Base implements XMLNodeHandler
             }
         }
         if($l_class[0]=="@"){
-            $l_class=AliasManager::getAlias(AliasList::TYPE_ELEMENT,substr($l_class,1));
+            $l_alias=AliasManager::getAlias(substr($l_class,1));
+            $l_class=$l_alias->getClass();
         }
         $l_nameNode=$p_node->attributes->getNamedItem("name");
         if($l_nameNode){
@@ -89,7 +97,7 @@ class XMLClassHandler extends Base implements XMLNodeHandler
         }
         
         return  new ObjectNode($l_name,$l_class,$p_parent,$this->addMethod);
-        
+       
     }
     
     function processAST(?ObjectNode $p_parent,\DOMNode $p_node,ObjectNode $p_ast):void

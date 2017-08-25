@@ -6,6 +6,7 @@ use XMLView\Engine\Data\DynamicVarValue;
 use XMLView\Engine\Data\DynamicStaticValue;
 use XMLView\Engine\Data\DynamicSequenceValue;
 use XMLView\Base\Base;
+use XMLView\Engine\Data\DynamicTranslationValue;
 
 class XMLStatementWriter extends Base{
     private $buffer;
@@ -43,18 +44,17 @@ class XMLStatementWriter extends Base{
     }
     
     
+  
     /**
-     * Parser string to a DynamicValue expression
-     * If expression is:
-     * "some string "            =>DynamicStaticValue("some string")
-     * "${somevar}               =>DynamicVarValue("somevar")
-     * "Error code : ${somevar}" =>DynamicSequenceValue([[0,"Error code :],[1,"somevar"]])
+     * The input string can contain variables in the form of ${varname}
+     * This method splits the string up in 
      * 
-     * @param stirng $p_stmt
+     * @param string $p_stmt
      * @throws XMLParserException
-     * @return string
+     * @return Array 
      */
-    public function parseToDVData(string $p_stmt){
+    public function parseToArray(string $p_stmt)
+    {
         $l_start=0;
         $l_dvData=[];
         $l_length=strlen($p_stmt);
@@ -75,10 +75,42 @@ class XMLStatementWriter extends Base{
                 throw new XMLParserException(__("Missing '}' in statement::stmt",["stmt"=>$p_stmt]),null);
             }
             
-            $l_dvData[]=[DynamicSequenceValue::TYPE_VAR,substr($p_stmt,$l_pos+2,$l_posEnd-$l_pos-2)];            
+            $l_dvData[]=[DynamicSequenceValue::TYPE_VAR,substr($p_stmt,$l_pos+2,$l_posEnd-$l_pos-2)];
             $l_start=$l_posEnd+1;
         }
-
+        return $l_dvData;
+    }
+    
+    function parseStringToTranslation(string $p_text)
+    {
+        $l_dvData=$this->parseToArray($p_text);
+        $l_text="";
+        $l_params=[];
+        foreach($l_dvData as $l_data){
+            if($l_data[0]===DynamicSequenceValue::TYPE_STRING){
+                $l_text .= $l_data[1];
+            } else {
+                $l_text .= ":".$l_data[1];
+                $l_params[]=$l_data[1];
+            }
+        }
+        $l_params=array_unique($l_params);
+        return "new ".DynamicTranslationValue::class."(".var_export($l_text,true).",".var_export($l_params,true).")";
+    }
+    
+    /**
+     * Parser string to a DynamicValue expression
+     * If expression is:
+     * "some string "            =>DynamicStaticValue("some string")
+     * "${somevar}               =>DynamicVarValue("somevar")
+     * "Error code : ${somevar}" =>DynamicSequenceValue([[0,"Error code :],[1,"somevar"]])
+     *
+     * @param stirng $p_stmt
+     * @throws XMLParserException
+     * @return string
+     */
+    public function parseToDVData(string $p_stmt){
+        $l_dvData=$this->parseToArray($p_stmt);
         if(count($l_dvData)==1){
             if($l_dvData[0][0]==DynamicSequenceValue::TYPE_STRING){
                 return "new ".DynamicStaticValue::class."(".var_export($l_dvData[0][1],true).")";
@@ -127,7 +159,11 @@ class XMLStatementWriter extends Base{
         if($this->isFixedParameter($p_fieldName)){
             $l_value=var_export($p_value,true);
         } else {
-            $l_value=$this->parseToDVData($p_value);
+            if(substr($p_value,0,2)=="__"){
+                $l_value=$this->parseStringToTranslation(substr($p_value,2));
+            } else {
+                $l_value=$this->parseToDVData($p_value);
+            }
         }
         $this->buffer .= "\n".$this->guiVar($p_name)."->set${p_fieldName}(${l_value});";
     }

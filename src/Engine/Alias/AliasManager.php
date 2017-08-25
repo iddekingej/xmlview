@@ -60,20 +60,33 @@ class AliasManager extends Base
     }
     
     /**
+     * Checks if alias exists
+     * 
+     * @param string $p_name Alias name
+     * @return bool          True: Alias with this name exists. False: Alias doesn't exists
+     */
+    public static function hasAlias(string $p_name):bool
+    {
+        if(static::$aliasList === null){
+            static::loadAliases();
+        }
+        return static::$aliasList->hasAlias($p_name);
+    }
+    
+    /**
      * Get alias by type and name. 
      * When this method is called the first time, the alias is read and cached for this session,
      * 
-     * @param string $p_type Alias type
      * @param string $p_name Alias Name
-     * @return string alias value.
+     * @return AliasItem Information about alias
      * @throws AliasException  This exception is raised if there is no alias with the given type.
 
      */
-    public static function getAlias(string $p_type,string $p_name):string
+    public static function getAlias(string $p_name):AliasItem
     {
         if(static::$aliasList===null){
             static::loadAliases();
         }
-        return static::$aliasList->getAlias($p_type,$p_name);
+        return static::$aliasList->getAlias($p_name);
     }
 }

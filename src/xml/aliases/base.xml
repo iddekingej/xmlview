@@ -8,14 +8,14 @@
     <element name="bulletList"        value="Lists\BulletList" />   
     <element name="dynamicBulletItem" value="Lists\DynamicBulletItem" />
     <element name="textRouteLink"     value="Link\TextRouteLink" />
-    <element name="page"              value="Base\XMLResourcePage" />
+    <page    name="HtmlPage"           value="Base\XMLResourcePage" />
     <element name="topMenu"           value="Menu\TopMenu" />
     <element name="topMenuConfirmItem" value="Menu\TopMenuConfirmItem" />
     <element name="topMenuTextItem"    value="Menu\TopMenuTextItem" />
     <element name="leftMenu"           value="Menu\LeftMenu" />
     <element name="menuGroup"          value="Menu\MenuGroup" />
     <element name="textMenuItem"       value="Menu\TextMenuItem" />
-    <element name="logoutMenuIem"      value="Menu\LogoutMenuItem" />
+    <element name="logoutMenuItem"      value="Menu\LogoutMenuItem" />
     <element name="horizontalSizer"    value="Sizer\HorizontalSizer" />
     <element name="verticalSizer"      value="Sizer\VerticalSizer" />
 </aliases>

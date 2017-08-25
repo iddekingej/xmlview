@@ -80,25 +80,21 @@ class AliasParser extends Base{
     private function parseAlias(string $p_base,\DOMNode $p_node)
     {
         $l_type=$p_node->nodeName;
-        if($l_type =="element"){
-            $this->checkAttributes($p_node,["name"=>1,"value"=>1]);
-            $l_nameNode=$p_node->attributes->getNamedItem("name");
-            if($l_nameNode === null){
-                throw new XMLParserException(__("Missing 'name' attribute"), $p_node);
-            }
-            $l_name=$l_nameNode->nodeValue;            
-            $l_valueNode=$p_node->attributes->getNamedItem("value");
-            if($l_valueNode === null){
-                throw new XMLParserException(__("Missing 'value' attribute"), $p_node);
-            }
-            
-            if($this->aliasList->hasAlias($l_type,$l_name)){
-                throw new XMLParserException(__("Duplicate alias :name of type :type",["name"=>$l_name,"type"=>$l_type]),$p_node);
-            }
-            $this->aliasList->addAlias($l_type, $l_name , $p_base.$l_valueNode->nodeValue);
-        } else {
-            throw new XMLParserException(__("Invalid alias element: :class",["class"=>$p_node->nodeName]), $p_node);
+        $this->checkAttributes($p_node,["name"=>1,"value"=>1]);
+        $l_nameNode=$p_node->attributes->getNamedItem("name");
+        if($l_nameNode === null){
+            throw new XMLParserException(__("Missing 'name' attribute"), $p_node);
         }
+        $l_name=$l_nameNode->nodeValue;            
+        $l_valueNode=$p_node->attributes->getNamedItem("value");
+        if($l_valueNode === null){
+            throw new XMLParserException(__("Missing 'value' attribute"), $p_node);
+        }
+        
+        if($this->aliasList->hasAlias($l_type,$l_name)){
+            throw new XMLParserException(__("Duplicate alias :name of type :type",["name"=>$l_name,"type"=>$l_type]),$p_node);
+        }
+        $this->aliasList->addAlias($l_type, $l_name , $p_base.$l_valueNode->nodeValue);
     }
     
     /**

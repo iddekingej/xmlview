@@ -3,7 +3,7 @@ use XMLView\Engine\Gui\XMLGUIParser;
 use XMLView\Widgets\Text\StaticText;
 use XMLView\Engine\Data\DynamicStaticValue;
 use XMLView\Engine\XMLParserException;
-
+use XMLView\Engine\AttributeDoesntExists;
 
 class parserTest extends XMLViewTest
 {
@@ -45,5 +45,12 @@ class parserTest extends XMLViewTest
         $l_parser=new XMLGUIParser();
         $this->expectException(XMLParserException::class);
         $l_result=$l_parser->parseXML("xml/parser/eref2.xml",null);
+    }
+ 
+    function testEAtt()
+    {
+        $l_parser=new XMLGUIParser();
+        $this->expectException(AttributeDoesntExists::class);
+        $l_result=$l_parser->parseXML("xml/parser/eatt.xml",null);
     }
 }
