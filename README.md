@@ -1,9 +1,9 @@
 # xmlview
-Component base view based on XML files
+Component based view, written with XML files
 
-Not much documentation yet, this is coming soon.
+Not much documentation yet.
 
-For now a simple example:
+For now, a simple example:
 
 
 <code>
