@@ -3,7 +3,10 @@ Component base view based on XML files
 
 Not much documentation yet, this is coming soon.
 For now a simple example:
+
+
 <code>
+<pre>
 &lt;page type="@hrPage"&gt;
     &lt;datalayer type="App\Vc\Route\EditLayer" /&gt;
     &lt;openLayer trace="${routeTrace}" /&gt;
@@ -14,4 +17,5 @@ For now a simple example:
         &lt;formTextArea name="comment" label="__Comment" /&gt;
     &lt;/form&gt;
 &lt;/page&gt;
+</pre>
 </code>
