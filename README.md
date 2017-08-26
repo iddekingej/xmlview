@@ -2,6 +2,7 @@
 Component base view based on XML files
 
 Not much documentation yet, this is coming soon.
+
 For now a simple example:
 
 
