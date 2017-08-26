@@ -13,7 +13,7 @@ interface DataStore
      * 
      * @return DataStore
      */
-    function getParent():DataStore;
+    function getParent():?DataStore;
     /**
      * Get value from data store
      * When data doesn't exists a DataNotFoundException  is raised     

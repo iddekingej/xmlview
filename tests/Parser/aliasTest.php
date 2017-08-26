@@ -18,14 +18,14 @@ class EngineTest extends XMLViewTest
     
     function testAlias1()
     {        
-        $l_result=AliasManager::getAlias(AliasList::TYPE_ELEMENT, 'test_TestComponent');        
-        $this->assertEquals("TestComponent",$l_result);     
+        $l_result=AliasManager::getAlias('test_TestComponent');        
+        $this->assertEquals("TestComponent",$l_result->getClass());     
     }
     
     function testAlias2()
     {        
         $this->expectException(AliasException::class);
-        $l_result=AliasManager::getAlias(AliasList::TYPE_ELEMENT, 'xx###a   aa');
+        $l_result=AliasManager::getAlias( 'xx###a   aa');
     }
     
 }

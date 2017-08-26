@@ -19,7 +19,7 @@ class MapData extends Base implements DataStore
      * @param MapData $p_parent Parent DataStore
      * @param array $p_data     This store is filled with this data.
      */
-    function __construct(?MapData $p_parent,Array $p_data=[])
+    function __construct(?DataStore $p_parent,Array $p_data=[])
     {
         $this->parent=$p_parent;    
         $this->store=$p_data;
@@ -30,7 +30,7 @@ class MapData extends Base implements DataStore
      * 
      * @see \XMLView\Engine\Data\DataStore::getParent()
      */
-    function getParent():DataStore
+    function getParent():?DataStore
     {
         return $this->parent;
     }

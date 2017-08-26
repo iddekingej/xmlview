@@ -67,6 +67,26 @@ class Form extends Widget
     }
     
     /**
+     * Set the title that is displayed above the form
+     * 
+     * @param DynamicValue $p_title String wrapped in a DynamicValue
+     */
+    function setTitle(DynamicValue $p_title):void
+    {
+        $this->title=$p_title;
+    }
+    
+    /**
+     * Get title that is displayed above the form
+     * 
+     * @return DynamicValue  Title
+     */
+    function getTitle():?DynamicValue
+    {
+        return $this->title;
+    }
+    
+    /**
      * Add a hidden value 
      * @param string  $p_name   name of hidden value
      * @param unknown $p_valeu  value of the hidden element
@@ -115,13 +135,25 @@ class Form extends Widget
      * 
      * @return array Return data used in form
      */
-    protected function preForm(?MapData $p_store):DataStore
-    {
-        $l_data=$this->data->getValue($p_store);
-        foreach($l_data as $l_name=>&$l_value){
-            $l_value=xmlview_old($l_name,$l_value);
+    protected function preForm(?DataStore $p_store):DataStore
+    {       
+        
+        $l_newValues=[];
+        foreach($this->elements as $l_name=>&$l_element){
+            if($l_element->hasData()){
+                $l_value=$p_store->getValue($l_name);
+                $l_newValue=xmlview_old($l_name,$l_value);
+                if($l_newValue != $l_value ){
+                    $l_newValues[$l_name]=$l_newValue;
+                }
+            }
         }
-        return new MapData($p_store,$l_data);        
+        if($l_newValues){
+            $l_data=new MapData($p_store,$l_newValues);
+        } else {
+            $l_data=$p_store;
+        }
+        return $l_data;        
     }
     
     /**
@@ -195,7 +227,8 @@ class Form extends Widget
         foreach($this->hidden as $l_name=>$l_value){
             $this->theme->base_Form->hidden($l_name,$l_formData->getValue($l_name));
         }
-        $this->theme->base_Form->header($this->title);
+        $l_title=$this->getAttValue("title", $p_store,"string",false);
+        $this->theme->base_Form->header($l_title);
         foreach($this->elements as $l_name=>$l_element){    
             $l_element->display($l_formData);
         }

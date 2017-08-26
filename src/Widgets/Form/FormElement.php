@@ -57,10 +57,8 @@ abstract class FormElement extends Widget
     
     function getRealValue(DataStore $p_store)
     {
-        if($this->value===null){
-            return null;
-        }
-        return $this->value->getValue($p_store);
+        $l_name=$this->getName();
+        return $p_store->getValue($l_name);        
     }
     
     function setLabel(DynamicValue$p_label):void

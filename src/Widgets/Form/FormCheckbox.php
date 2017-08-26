@@ -17,6 +17,6 @@ class FormCheckbox extends FormInputElement
      */
     function displayElement(?DataStore $p_store=null):void
     {        
-        $this->theme->base_Form->checkboxElement($this->getId(),$this->getName(),$this->getValue()->getValue(p_store));        
+        $this->theme->base_Form->checkboxElement($this->getId(),$this->getName(),$this->getRealValue($p_store));        
     }
 }

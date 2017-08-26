@@ -4,6 +4,7 @@ namespace XMLView\Widgets\Form;
 
 use XMLView\Engine\Data\DataStore;
 use XMLView\Engine\Data\DynamicValue;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 /**
  * Class representing a Textarea form element 
@@ -14,16 +15,22 @@ class FormTextArea extends FormInputElement
 {
     /**
      * Width of the textarea in css units
-     * @var string
+     * @var DynamicValue
      */
-    private $width='100%';
+    private $width;
     /**
      * Height of the textarea in css units
      * 
-     * @var string
+     * @var DynamicValue
      */
-    private $height='100px';
+    private $height;
     
+    function __construct()
+    {
+        parent::__construct();
+        $this->width=new DynamicStaticValue("100%");
+        $this->height=new DynamicStaticValue("100px");
+    }
     /**
      * Set the width of the text area.
      * 
