@@ -4,20 +4,42 @@ namespace XMLView\Base;
 
 use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DataStore;
+use XMLView\Widgets\Sizer\Sizer;
 
 /**
- * This is a trait for widget to contain one sub element.
+ * This is a trait for widget that contain one sub element.
  * This sub element is a sizer that can contain one or more children.
  *
  */
 trait SubSizer
 {
+    /**
+     * Sub element of widget 
+     * 
+     * @var Sizer
+     */
     private $top;
     
-    function setTop(Widget $p_widget){
+    /**
+     * Set the sub element of this widget
+     * 
+     * @param Sizer $p_widget
+     */
+    function setTop(Sizer $p_widget){
         $this->top=$p_widget;
         $this->top->setParent($this);
     }
+    
+    /**
+     * Get top widget
+     *
+     * @return Sizer|NULL
+     */
+    function getTop():?Sizer
+    {
+        return $this->top;
+    }
+    
     /**
      * Get JS url's for this widget
      *      
@@ -72,13 +94,5 @@ trait SubSizer
         $p_widget->setParent($this);
     }
     
-    /**
-     * Get top widget
-     * 
-     * @return Widget|NULL
-     */
-    function getTop():?Widget
-    {
-        return $this->top;
-    }
+
 }
