@@ -6,7 +6,7 @@ namespace XMLView\Engine\Data;
 use XMLView\Base\Base;
 
 /**
- * Data store that is using a hashmap
+ * Data store that is using a HashMap
  *
  */
 class MapData extends Base implements DataStore
@@ -16,7 +16,7 @@ class MapData extends Base implements DataStore
     
     /**
      * Initialize 
-     * @param MapData $p_parent Parent DataStore
+     * @param DataStore $p_parent Parent DataStore
      * @param array $p_data     This store is filled with this data.
      */
     function __construct(?DataStore $p_parent,Array $p_data=[])
