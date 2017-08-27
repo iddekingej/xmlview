@@ -3,6 +3,7 @@ namespace XMLView\Engine;
 use XMLView\Engine\Parser\ObjectNode;
 use XMLView\Base\HashMap;
 use XMLView\Engine\Alias\AliasManager;
+use XMLView\Engine\Parser\ParseData;
 
 /**
  * XML files uses a kind of 'bean' technology. Each node is converted to a object.
@@ -21,22 +22,33 @@ abstract class XMLClassParser
     
     /**
      * HashMap of name=>element translation
-     * @var HashMap
+     * @var ParseData
      */
-    private $nameList;
+    private $parseData;
     
-    function __construct(?HashMap $p_nameList=null)
+    function __construct(?ParseData $p_parseData=null)
     {
-        if($p_nameList === null){
-            $this->nameList=new HashMap();   
+        if($p_parseData === null){
+            $this->parseData=new ParseData();   
         } else {
-            $this->nameList=$p_nameList;
+            $this->parseData=$p_parseData;
         }
     }
     
-    function getNameList():?HashMap
+    function getUsedFiles():array
     {
-        return $this->nameList;
+        return $this->parseData->getUsedFiles();
+    }
+    
+    /**
+     * When a xml file is included , another parser is created.
+     * @see ParseData is used for sharing data between parsers     
+     * 
+     * @return ParseData
+     */
+    function getParseData():ParseData
+    {
+        return $this->parseData;
     }
     
     /**
@@ -95,6 +107,7 @@ abstract class XMLClassParser
         $l_parser=$this->newParser();
         $l_ast=$l_parser->parseXMLToAST($p_fileName,$p_parent);
         $p_handler->processAST($p_parent, $p_node, $l_ast);
+        $this->parseData->addUsedFile($p_fileName);
         return $l_ast;
     }
     /**
@@ -137,9 +150,8 @@ abstract class XMLClassParser
         $l_file=$p_node->attributes->getNamedItem("file");
         if($l_ref){
             $l_refName=$l_ref->nodeValue;
-            if($this->nameList->has($l_refName)){
-                $l_newObject=$this->nameList->get($l_refName);
-            } else {
+            $l_newObject=$this->parseData->getNamedItem($l_refName);
+            if($l_newObject === null){
                 throw new XMLParserException(__("Element with name ':name' not found",["name"=>$l_refName]), $p_node);
             }
         } else {
@@ -164,10 +176,10 @@ abstract class XMLClassParser
                 throw new XMLParserException(__("Name attribute not allowed when ref is used"), $p_node);
             }
             $l_name=$l_nameNode->nodeValue;
-            if($this->nameList->has($l_name)){
+            if($this->parseData->getNamedItem($l_name)){
                 throw new XMLParserException(__("There is already a node with name ':name'",["name"=>$l_name]), $p_node);
             } else {
-                $this->nameList->put($l_name, $l_newObject);
+                $this->parseData->addNamedItem($l_name, $l_newObject);
             }
         }
         

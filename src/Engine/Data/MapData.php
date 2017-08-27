@@ -6,7 +6,9 @@ namespace XMLView\Engine\Data;
 use XMLView\Base\Base;
 
 /**
- * Data store that is using a HashMap
+ * Data used by the component are stored in a DataStore
+ * 
+ * This DataStore is using a hashmap.
  *
  */
 class MapData extends Base implements DataStore

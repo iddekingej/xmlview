@@ -20,14 +20,31 @@ class Form extends Widget
 {
     private static $idCnt=0;
     protected $id=null;
+    /**
+     * Title displayed on top of the form
+     * @var DynamicValue
+     */
     protected $title;
-    protected $route;
-    protected $routeParams;
+   
+    /**
+     * Data is submitted to this url
+     * 
+     * @var DynamicValue
+     */
     protected $url;
+    /**
+     * URL used when the cancel button is pressed
+     * @var DynamicValue
+     */
     protected $cancelUrl;
     protected $saveText;
+    /**
+     * Text on the cancel button
+     * 
+     * @var DynamicValue
+     */
     protected $cancelText;
-    protected $data=null;
+    
     protected $errors;
     private $elements=[];
     private $hidden=[];
@@ -46,26 +63,54 @@ class Form extends Widget
     }
      
    
-    function setData(DynamicValue $p_data)
-    {
-        $this->data=$p_data;
-    }
-    
-    function getData()
-    {
-        return $this->data;
-    }
-    
+    /**
+     * Set the submit URL 
+     * 
+     * @param DynamicValue $p_url Submit URL wrapped in a DynamicValue
+     */
     function setUrl(DynamicValue $p_url):void
     {
         $this->url=$p_url;
     }
     
+    /**
+     * Get the submit url 
+     * @return DynamicValue|NULL Submit url wrapped in dynamic value 
+     */
     function getUrl():?DynamicValue
     {
         return $this->url;
     }
     
+    /**
+     * When this property is set and the url is not null a cancel button 
+     * is dsplayed. When this button is pressed, the cancelURL page is loaded 
+     * @param DynamicValue $p_url
+     */
+    function setCancelUrl(DynamicValue $p_url)
+    {
+        $this->cancelUrl=$p_url;
+    }
+    
+    /**
+     * Get the cancel url.
+     * 
+     * @return DynamicValue|NULL
+     */
+    function getCancelUrl():?DynamicValue
+    {
+       return $this->cancelUrl; 
+    }
+    
+    
+    function setCancelText(DynamicValue $p_cancelText)
+    {
+        $this->cancelText=$p_cancelText;
+    }
+    function getCancelText():?DynamicValue
+    {
+        return $this->cancelText;
+    }
     /**
      * Set the title that is displayed above the form
      * 
@@ -232,10 +277,12 @@ class Form extends Widget
         foreach($this->elements as $l_name=>$l_element){    
             $l_element->display($l_formData);
         }
-        $this->theme->base_Form->submitHeader($this->saveText?$this->saveText:__("Save"));        
-        if($this->cancelUrl){
-            $l_js="window.location=".json_encode($this->cancelUrl);
-            $this->theme->base_Form->submitCancelButton($this->cancelText?$this->cancelText:__("Cancel"),$l_js);
+        $this->theme->base_Form->submitHeader($this->saveText?$this->saveText:__("Save"));
+        $l_cancelUrl=$this->getAttValue("cancelUrl", $p_store,"string",false);
+        if($l_cancelUrl){
+            $l_cancelText=$this->getAttValue("cancelText", $p_store,"string",false);
+            $l_js="window.location=".json_encode($l_cancelUrl);
+            $this->theme->base_Form->submitCancelButton($l_cancelText?$$l_cancelText:__("Cancel"),$l_js);
         }
 
         $this->theme->base_Form->submitFooter();

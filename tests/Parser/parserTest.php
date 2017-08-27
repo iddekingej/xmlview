@@ -4,6 +4,7 @@ use XMLView\Widgets\Text\StaticText;
 use XMLView\Engine\Data\DynamicStaticValue;
 use XMLView\Engine\XMLParserException;
 use XMLView\Engine\AttributeDoesntExists;
+use XMLView\Engine\Parser\ParseData;
 
 class parserTest extends XMLViewTest
 {
@@ -52,5 +53,12 @@ class parserTest extends XMLViewTest
         $l_parser=new XMLGUIParser();
         $this->expectException(AttributeDoesntExists::class);
         $l_result=$l_parser->parseXML("xml/parser/eatt.xml",null);
+    }
+    
+    function testUnkNamedItem()
+    {
+        $l_parserData=new ParseData();
+        $l_ni=$l_parserData->getNamedItem("bla");
+        $this->assertNull($l_ni);
     }
 }

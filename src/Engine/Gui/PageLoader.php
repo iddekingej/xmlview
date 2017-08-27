@@ -14,14 +14,27 @@ class PageLoader extends Base
      * @param string $p_cached  Cache name
      * @return boolean          true: cache can be used
      */
-    private static function canUseCached(string $p_orgName,string $p_cached):bool
+    private static function canUseCached(string $p_orgName,string $p_cached,string $p_depFile):bool
     {
         if(!file_exists($p_cached)){
             return false;
         }
         $l_orgMTime=filemtime($p_orgName);
         $l_cachedMTime=filemtime($p_cached);
-        return $l_orgMTime<= $l_cachedMTime;
+        if($l_orgMTime >$l_cachedMTime){
+            return false;
+        }
+        if(file_exists($p_depFile)){
+            $l_deps=require_once($p_depFile);
+            foreach($l_deps as $l_dep){
+                $l_cache=xmlview_cachePath($l_dep);
+                $l_cachedMTime=filemtime($l_cache);
+                if($l_orgMTime >$l_cachedMTime){
+                    return false;
+                }
+            }
+        }
+        return false;
     }
        
     /**
@@ -34,7 +47,9 @@ class PageLoader extends Base
     {        
         $l_source=xmlview_resourcePath($p_source);
         $l_cached=xmlview_cachePath($p_source);
-        if(static::canUseCached($l_source,$l_cached)){
+        $l_depBase=dirname($p_source)."/dep__".basename($p_source);
+        $l_dep = xmlview_cachePath($l_depBase);
+        if(static::canUseCached($l_source,$l_cached,$l_depBase)){
             return $l_cached;
         }
         $l_parser=new XMLGUIParser();
@@ -43,6 +58,8 @@ class PageLoader extends Base
         if(!file_exists($l_path)){
             mkdir($l_path,0777,true);
         }
+        $l_usedFiles=$l_parser->getUsedFiles();
+        file_put_contents($l_dep,"<?php\n return ".var_export($l_usedFiles,true).";");
         file_put_contents($l_cached,"<?php\n".$l_code,LOCK_EX);
         return $l_cached;
     }

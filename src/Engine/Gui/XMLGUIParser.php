@@ -17,7 +17,7 @@ class XMLGUIParser extends XMLClassParser
     
     function newParser():XMLClassParser
     {
-        return new XMLGUIParser($this->getNameList());
+        return new XMLGUIParser($this->getParseData());
     }
     
     function setupHandlers()
