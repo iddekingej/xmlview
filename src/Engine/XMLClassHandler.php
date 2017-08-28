@@ -44,6 +44,8 @@ class XMLClassHandler extends Base implements XMLNodeHandler
         }
         return is_subclass_of($p_subject,$p_isOf);
     }
+    
+    
     /**
      * Create object from a XML Node
      * @param XMLStatementWriter $p_writer  Write used to generate PHP
@@ -62,6 +64,14 @@ class XMLClassHandler extends Base implements XMLNodeHandler
                 ]), $p_node);
             }
         }
+        
+        $l_forNode=$p_node->attributes->getNamedItem("for");
+        if($l_forNode){
+            $l_addMethod=$l_forNode->nodeValue;
+        } else {
+            $l_addMethod=$this->addMethod;
+        }
+        
         $l_node=$p_node->attributes->getNamedItem("type");
         if($l_node){
             if($p_alias){
@@ -96,7 +106,7 @@ class XMLClassHandler extends Base implements XMLNodeHandler
                 throw new XMLParserException(__("Object is class ':class' , but doesn't descent from super class ':super' ",["class"=>$l_class,"super"=>$this->baseClass]), $p_node);
         }
         
-        return  new ObjectNode($l_name,$l_class,$p_parent,$this->addMethod);
+        return  new ObjectNode($l_name,$l_class,$p_parent,$l_addMethod);
        
     }
     
