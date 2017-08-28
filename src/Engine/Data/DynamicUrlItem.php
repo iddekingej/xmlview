@@ -23,6 +23,11 @@ class DynamicUrlItem implements DynamicValue
      */
     private $parameters=[];
     
+    
+    function __isset($p_name)
+    {
+        return true;
+    }
     /**
      * Set the parameter of the URL 
      * 

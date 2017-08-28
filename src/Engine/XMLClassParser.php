@@ -66,6 +66,9 @@ abstract class XMLClassParser
     private function checkAttributes(string $p_className,Array $p_attributes,\DOMNode $p_node)
     {
         $l_reflection=new \ReflectionClass($p_className);
+        if($l_reflection->hasMethod("__call")){
+            return;
+        }
         foreach($p_attributes as $l_attribute=>$l_value){
             if(!$l_reflection->hasMethod("set${l_attribute}")){
                 throw new AttributeDoesntExists($p_className, $l_attribute, $p_node);

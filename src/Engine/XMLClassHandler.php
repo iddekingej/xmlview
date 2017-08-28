@@ -129,6 +129,6 @@ class XMLClassHandler extends Base implements XMLNodeHandler
     
     function isAttributeIgnored(string $p_name):bool
     {
-        return ($p_name=="type") ;
+        return ($p_name=="type") || ($p_name=="for") ;
     }
 }
