@@ -47,7 +47,7 @@ class XMLStatementWriter extends Base{
   
     /**
      * The input string can contain variables in the form of ${varname}
-     * This method splits the string up in 
+     * This method splits the string up in variables and constant string parts.
      * 
      * @param string $p_stmt
      * @throws XMLParserException
@@ -81,6 +81,12 @@ class XMLStatementWriter extends Base{
         return $l_dvData;
     }
     
+    /**
+     * Parse a property expression to a DynamicTranslationValue     
+     * @param string $p_text
+     * @return string
+     */
+    
     function parseStringToTranslation(string $p_text)
     {
         $l_dvData=$this->parseToArray($p_text);
@@ -93,6 +99,7 @@ class XMLStatementWriter extends Base{
                 $l_text .= ":".$l_data[1];
                 $l_params[]=$l_data[1];
             }
+            //TODO check if l_data[0] is valid.
         }
         $l_params=array_unique($l_params);
         return "new ".DynamicTranslationValue::class."(".var_export($l_text,true).",".var_export($l_params,true).")";

@@ -1,4 +1,8 @@
 <?php 
+/**
+ * Deptracted
+ */
+
 declare(strict_types=1);
 namespace XMLView\Base;
 

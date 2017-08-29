@@ -24,18 +24,30 @@ trait SubList{
         
     }
     
+    /**
+     * Get JS files used by this component
+     * 
+     * @param DataStore $p_store  Data store used for calculating condition.
+     * @return array              Javascript used by this component
+     */
     function getMyJs(DataStore $p_store):array
     {
         return [];
     }
-    
+
+    /**
+     * Get css files used by this component
+     *
+     * @param DataStore $p_store  Data store used for calculating condition.
+     * @return array              CSS used by this component
+     */
     function getMyCss(DataStore $p_store):array
     {
         return [];
     }
     
 /**
- * Collect Java script files used by subelements
+ * Collect Java script files used by this component and sub elements
  * These java script are included in the header of the page 
  * 
  * @return array List of Javascript files
@@ -52,7 +64,7 @@ trait SubList{
     }
     
 /**
- * Collect Css files used by used by the sub element
+ * Collect Css files used by used by this component and  sub elements
  * The returned CSS files are included in the header of the page.
  * 
  * @return array Used css files
@@ -68,9 +80,9 @@ trait SubList{
         return array_unique($l_css);
     }
 /**
- * Get the sub element.
+ * Get the sub elements.
  * 
- * @return Array  An list of HtmlComponent objects that are subelements
+ * @return Array  An list of HtmlComponent objects that are sub elements
  */
     function getSubItems()
     {
@@ -91,6 +103,7 @@ trait SubList{
         return $p_component;
     }
     
+
     function preDisplaySub(DataStore $p_store,Widget $p_item):void
     {
         
@@ -100,6 +113,12 @@ trait SubList{
     {
         
     }
+    
+    /**
+     * Print sub elements of this component:
+     * Only components that a visible are displayed.
+     * @param DataStore $p_store
+     */
     
     function displaySub(DataStore $p_store):void
     {

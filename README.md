@@ -1,6 +1,6 @@
 # xmlview
 
-PHP framework for writing view components with XML files.
+A PHP framework with XML based view components.
 
 Not much documentation yet.
 
