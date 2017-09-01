@@ -11,6 +11,7 @@ class leftMenuTest extends XMLViewTest
     function testLeftMenu(){
         $l_store=new MapData(null);
         $l_menu=new LeftMenu();
+        $l_menu->setCurrentTag(new DynamicStaticValue("bla"));        
         $l_menu->display($l_store);
         $this->assertEquals(1,1);
     }

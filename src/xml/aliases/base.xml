@@ -18,4 +18,5 @@
     <element name="logoutMenuItem"      value="Menu\LogoutMenuItem" />
     <element name="horizontalSizer"    value="Sizer\HorizontalSizer" />
     <element name="verticalSizer"      value="Sizer\VerticalSizer" />
+    <element name="iconTextLink"       value="Link\IconTextLink" />
 </aliases>

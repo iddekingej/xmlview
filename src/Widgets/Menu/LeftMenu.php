@@ -8,6 +8,7 @@ use XMLView\Base\SubList;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Widgets\Base\HtmlComponent;
 use XMLView\Widgets\Base\WrongWidgetTypeException;
+use XMLView\Engine\Data\DynamicValue;
 
 /**
  * 'LeftMenu' class. Displays a vertical menu 

@@ -18,6 +18,7 @@ abstract class HtmlPage extends HtmlComponent
     protected $title;
     protected $extraCss=[];
     protected $extraJs=[];
+
     private $errors;
     
     
@@ -26,7 +27,14 @@ abstract class HtmlPage extends HtmlComponent
         $this->theme=new Theme();
         $this->setTop(new VerticalSizer());
     }
+
     
+    /**
+     * Set the title of the page.
+     * This value set's the <title> tag of the page
+     * 
+     * @param DynamicValue $p_title  String wrapped in a DynamicValue object
+     */
     function setTitle(DynamicValue $p_title)
     {
         $this->title=$p_title;
