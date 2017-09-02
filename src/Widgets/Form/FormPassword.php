@@ -18,6 +18,6 @@ class FormPassword extends FormInputElement
     
     function displayElement(?DataStore $p_store=null):void
     {
-        $this->theme->base_Form->password($this->getId(),$this->getName(),$this->getReadValue($p_store));        
+        $this->theme->base_Form->password($this->getId(),$this->getName(),$this->getRealValue($p_store));        
     }
 }

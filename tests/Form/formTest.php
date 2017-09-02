@@ -4,6 +4,7 @@ declare(strict_types=1);
 use XMLView\Widgets\Form\Form;
 use XMLView\Engine\Data\MapData;
 use XMLView\Engine\Data\DynamicStaticValue;
+use XMLView\Widgets\Form\FormPassword;
 class formTest extends XMLViewTest
 {
     function testForm1()
@@ -16,5 +17,17 @@ class formTest extends XMLViewTest
         $l_page->add($l_form);
         $l_page->display($l_store);
         $this->assertTrue(true);
+    }
+    
+    function testPassword()
+    {
+        $l_widget=new FormPassword();
+        $l_widget->setName("bla");
+        $l_widget->setLabel(new DynamicStaticValue("qq"));
+        $l_widget->setRowId("row1");
+        $l_widget->setId("www");
+        $l_store= new MapData(null,["bla"=>"xxuvv"]);
+        $this->expectOutputRegex("/bla(.*)[\"]xxuvv[\"]/s");
+        $l_widget->display($l_store);
     }
 }

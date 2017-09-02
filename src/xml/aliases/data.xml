@@ -1,0 +1,3 @@
+<aliases>
+    <datalayer  name="attributeDataLayer" value="XMLView\Engine\Data\AttributeDataLayer"/>
+</aliases>
