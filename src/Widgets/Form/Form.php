@@ -9,6 +9,8 @@ use XMLView\Engine\Data\DynamicValue;
 use XMLView\Engine\Data\MapData;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Widgets\Base\HtmlComponent;
+use XMLView\Base\HtmlClass;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 
 
@@ -60,6 +62,7 @@ class Form extends Widget
         self::$idCnt++;
         $this->id="form_".self::$idCnt."_";
         parent::__construct();
+        $this->setClassName(new DynamicStaticValue(HtmlClass::FORM));
     }
      
    
@@ -268,7 +271,7 @@ class Form extends Widget
             }
         }
         $l_formData=$this->preForm($p_store);
-        $this->theme->base_Form->formHeader($this->id,$this->url?$this->url->getValue($l_formData):"");
+        $this->theme->base_Form->formHeader($this->getBlockClass($p_store),$this->id,$this->url?$this->url->getValue($l_formData):"");
         foreach($this->hidden as $l_name=>$l_value){
             $this->theme->base_Form->hidden($l_name,$l_formData->getValue($l_name));
         }

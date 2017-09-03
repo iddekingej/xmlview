@@ -57,7 +57,7 @@ abstract class HtmlComponent extends Base
      * Alignment of component inside its sizer containt
      * @var string
      */
-    protected $containerAlign=Align::LEFT;
+    protected $containerAlign;
     
     /**
      * Data layer belonging of this component, can be null.
@@ -65,6 +65,7 @@ abstract class HtmlComponent extends Base
      * @var DataLayer
      */
     private $dataLayer;
+        
     
     /**
      * Set data layer of component
@@ -188,9 +189,8 @@ abstract class HtmlComponent extends Base
      * Set the alignment of the element inside the spacer 
      * @param string $p_align  Alignment:Align::LEFT, Align::RIGHT or Align::CENTER
      */
-    function setContainerAlign(string $p_align)
-    {
-        Align::validate($p_align);
+    function setContainerAlign(DynamicValue $p_align)
+    {        
         $this->containerAlign=$p_align;
     }
     
@@ -199,7 +199,7 @@ abstract class HtmlComponent extends Base
      * 
      * @return string Alignment see the @see Align class constants
      */
-    function getContainerAlign():string
+    function getContainerAlign():?DynamicValue
     {
         return $this->containerAlign;
     }

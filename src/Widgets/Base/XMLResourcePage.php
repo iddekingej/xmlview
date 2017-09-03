@@ -1,4 +1,5 @@
 <?php 
+declare(strict_types=1);
 namespace XMLView\Widgets\Base;
 
 use XMLView\Widgets\Base\HtmlPage;

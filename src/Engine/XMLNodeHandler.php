@@ -1,6 +1,6 @@
 <?php 
+declare(strict_types=1);
 namespace XMLView\Engine;
-
 
 use XMLView\Engine\Parser\ObjectNode;
 use XMLView\Engine\Alias\AliasItem;

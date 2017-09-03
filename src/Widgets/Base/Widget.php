@@ -5,6 +5,8 @@ namespace XMLView\Widgets\Base;
 
 use XMLView\Engine\Data\DataStore;
 use XMLView\Engine\Data\DynamicValue;
+use XMLView\Base\Align;
+use XMLView\Base\HtmlClass;
 /**
  * Base class of all widgets/components
  * 
@@ -13,6 +15,16 @@ use XMLView\Engine\Data\DynamicValue;
 abstract class Widget extends HtmlComponent
 {
 
+    /**
+     * Set the class name of the top element
+     */
+    private $className;
+    /**
+     * Determines if the  widget is begin displayed
+     * - True Widget is displayed (html is generated)
+     * - False Widget is not displayed (no html generated)
+     * @var DynamicValue
+     */
     private $visible;
     
     /**
@@ -84,6 +96,30 @@ abstract class Widget extends HtmlComponent
             return true;
         }
         return $l_value;
+    }
+    /**
+     * Get the class name 
+     * @return string
+     */
+    function getBlockClass(DataStore $p_store):string
+    {   
+        $l_className=$this->getAttValue("className", $p_store,"string",false);
+        $l_align=$this->getAttValue("containerAlign",$p_store,"string",false);
+        
+        if($l_align==Align::CENTER){
+            $l_className .= " ".HtmlClass::BLOCK_CENTER;
+        }
+        return $l_className;
+    }
+    
+    function setClassName(DynamicValue $p_className):void
+    {
+        $this->className=$p_className;
+    }
+    
+    function getClassName():?DynamicValue
+    {
+        return $this->className;
     }
     
     /**

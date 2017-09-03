@@ -1,9 +1,5 @@
 <?php 
-
-use XMLView\Engine\Data\MapData;
-use XMLView\Widgets\Base\XMLResourcePage;
-use XMLView\Widgets\Base\WrongWidgetTypeException;
-use XMLView\Engine\Gui\PageLoader;
+declare(strict_types=1);
 use XMLView\View\ResourceView;
 
 /**

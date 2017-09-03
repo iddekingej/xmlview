@@ -16,9 +16,9 @@ class Form extends ThemeItem
      * @param string $p_id Unique dom ID form the form
      * @param string $p_url Submit url of the form
      */
-    function formHeader(string $p_id,string $p_url):void
+    function formHeader(string $p_className,string $p_id,string $p_url):void
     {
-        ?><form class="formForm" id="<?=$this->e($p_id)?>" method="post" action="<?=$this->e($p_url)?>" enctype="multipart/form-data">
+        ?><form class="<?=$this->e($p_className)?>" id="<?=$this->e($p_id)?>" method="post" action="<?=$this->e($p_url)?>" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="<?=$this->e(csrf_token())?>" />
         <?php 
     }
