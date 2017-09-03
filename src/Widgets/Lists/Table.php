@@ -145,7 +145,7 @@ abstract class Table extends Widget{
      * @see \XMLView\HtmlComponent::display()
      */
     
-    function displayContent(?DataStore $p_store=null):void
+    function displayContent(DataStore $p_store):void
     {
         $this->setup();
         $this->theme->base_Table->tableHeader();

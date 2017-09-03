@@ -50,7 +50,7 @@ class DynamicUrlItem implements DynamicValue
      * 
      * @param DynamicValue $p_route URL route (string) wrapped in a DynamicValue object
      */
-    function setRoute(DynamicValue $p_route)
+    function setRoute(DynamicValue $p_route):void
     {
         $this->route=$p_route;       
     }

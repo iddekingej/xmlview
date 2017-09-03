@@ -77,7 +77,7 @@ class FormTextArea extends FormInputElement
      * 
      * @see \App\Vc\Form\FormInputElement::displayElement()
      */
-    function displayElement(?DataStore $p_store=null):void
+    function displayElement(DataStore $p_store):void
     {
         $l_css  ="width:".$this->width->getValue($p_store).";";
         $l_css .="height:".$this->height->getValue($p_store);

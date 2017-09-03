@@ -7,7 +7,7 @@ use XMLView\Engine\Data\DataStore;
 
 class HorizontalSizer extends Sizer
 {
-    function displayContent(?DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
         $this->theme->base_Sizer->sizerHeader();
         $this->theme->base_Sizer->rowHeader();

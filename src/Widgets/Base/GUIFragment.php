@@ -29,7 +29,7 @@ class GUIFragment extends Widget{
     /**
      * Display all content 
      */
-    function displayContent(?DataStore $p_store=null)
+    function displayContent(?DataStore $p_store=null):void
     {
         $this->top->display($p_store);
     }

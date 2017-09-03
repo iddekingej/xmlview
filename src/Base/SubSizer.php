@@ -25,7 +25,8 @@ trait SubSizer
      * 
      * @param Sizer $p_widget
      */
-    function setTop(Sizer $p_widget){
+    function setTop(Sizer $p_widget):void
+    {
         $this->top=$p_widget;
         $this->top->setParent($this);
     }
@@ -88,7 +89,7 @@ trait SubSizer
      * 
      * @param Widget $p_widget        Child widget
      */
-    function add(Widget $p_widget)
+    function add(Widget $p_widget):void
     {
         $this->top->add($p_widget);
         $p_widget->setParent($this);

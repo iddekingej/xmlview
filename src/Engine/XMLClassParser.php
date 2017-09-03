@@ -215,7 +215,7 @@ abstract class XMLClassParser
     /**
      * Setup handlers for this parser
      */
-    abstract function setupHandlers();
+    abstract function setupHandlers():void;
     
     /**
      * Check the top node

@@ -6,7 +6,7 @@ class HashMap
 {
     private $map=[];
     
-    function put($p_key,$p_value)
+    function put($p_key,$p_value):void
     {
         $this->map[$p_key]=$p_value;
     }

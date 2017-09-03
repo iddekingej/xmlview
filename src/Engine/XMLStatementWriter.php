@@ -16,12 +16,12 @@ class XMLStatementWriter extends Base{
         return addslashes($p_str);
     }
     
-    function isFixedParameter($p_name)
+    function isFixedParameter($p_name):bool
     {        
         return ($p_name=="name");
     }
     
-    function addConcat(string &$p_str,$p_new)
+    function addConcat(string &$p_str,$p_new):void
     {
         if($p_new){
             if($p_str){
@@ -31,14 +31,14 @@ class XMLStatementWriter extends Base{
         }
     }
     
-    function addConcatStr(string &$p_str,string $p_new)
+    function addConcatStr(string &$p_str,string $p_new):void
     {
         if($p_new){
             $this->addConcat($p_str,"\"".$this->escape($p_new)."\"");
         }
     }
     
-    function guiVar($p_name)
+    function guiVar($p_name):string
     {
         
         return "\$l_gui->$p_name";
@@ -54,7 +54,7 @@ class XMLStatementWriter extends Base{
      * @throws XMLParserException
      * @return Array 
      */
-    public function parseToArray(string $p_stmt)
+    public function parseToArray(string $p_stmt):array
     {
         $l_start=0;
         $l_dvData=[];
@@ -88,7 +88,7 @@ class XMLStatementWriter extends Base{
      * @return string
      */
     
-    function parseStringToTranslation(string $p_text)
+    function parseStringToTranslation(string $p_text):string
     {
         $l_dvData=$this->parseToArray($p_text);
         $l_text="";
@@ -117,7 +117,8 @@ class XMLStatementWriter extends Base{
      * @throws XMLParserException
      * @return string
      */
-    public function parseToDVData(string $p_stmt){
+    public function parseToDVData(string $p_stmt):string
+    {
         $l_dvData=$this->parseToArray($p_stmt);
         if(count($l_dvData)==1){
             if($l_dvData[0][0]==DynamicSequenceValue::TYPE_STRING){
@@ -181,12 +182,12 @@ class XMLStatementWriter extends Base{
      * @param unknown $p_name
      */
     
-    function addReturn($p_name)
+    function addReturn($p_name):void
     {
         $this->buffer .= "\n return ".$this->guiVar($p_name).";";
     }
     
-    function getCode()
+    function getCode():string
     {
        return $this->buffer; 
     }

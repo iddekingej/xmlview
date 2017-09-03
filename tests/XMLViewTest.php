@@ -1,5 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
+use XMLView\Widgets\Base\Widget;
+use XMLView\Engine\Data\MapData;
 
 /**
  * 
@@ -47,4 +49,9 @@ abstract class XMLViewTest extends TestCase
         return filesize($this->getResourcePath($p_name));
     }
     
+    function displayElement(Widget $p_widget,Array $p_data=[])
+    {
+        $l_data=new MapData(null,$p_data);
+        $p_widget->display($l_data);
+    }
 }

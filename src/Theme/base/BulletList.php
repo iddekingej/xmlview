@@ -7,22 +7,22 @@ use XMLView\Widgets\Base\ThemeItem;
 
 class BulletList extends ThemeItem
 {
-    function listHeader()
+    function listHeader():void
     {
         ?><ul><?php         
     }
     
-    function itemHeader()
+    function itemHeader():void
     {
         ?><li><?php 
     }
     
-    function itemFooter()
+    function itemFooter():void
     {
         ?></li><?php   
     }
     
-    function listFooter()
+    function listFooter():void
     {
         ?></ul><?php    
     }

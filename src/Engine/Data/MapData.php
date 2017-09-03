@@ -61,14 +61,16 @@ class MapData extends Base implements DataStore
      * When value exists in a parent store, the value is not overwritten but
      * added to this store    
      */
-    function setValue(string $p_name,$p_value):void{
+    function setValue(string $p_name,$p_value):void
+    {
         $this->store[$p_name]=$p_value;
     }
     
     /**
      * Set values by associative array. The key is the name of the value 
      */
-    function setValues(Array $p_values):void{
+    function setValues(Array $p_values):void
+    {
         $this->store=array_merge($this->store,$p_value);
     }
 }

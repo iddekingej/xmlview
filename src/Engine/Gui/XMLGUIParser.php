@@ -21,7 +21,7 @@ class XMLGUIParser extends XMLClassParser
         return new XMLGUIParser($this->getParseData());
     }
     
-    function setupHandlers()
+    function setupHandlers():void
     {        
         $this->addHandler("page",new XMLClassHandler(XMLResourcePage::class, XMLResourcePage::class, null,""));
         $this->addHandler("element",new XMLClassHandler(null, HtmlComponent::class, HtmlComponent::class,"add"));

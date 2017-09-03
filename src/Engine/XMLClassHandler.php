@@ -6,7 +6,6 @@ namespace XMLView\Engine;
 use XMLView\Base\Base;
 use XMLView\Engine\Parser\ObjectNode;
 use XMLView\Engine\Alias\AliasManager;
-use XMLView\Engine\Alias\AliasList;
 use XMLView\Engine\Alias\AliasItem;
 
 class XMLClassHandler extends Base implements XMLNodeHandler

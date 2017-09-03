@@ -45,7 +45,7 @@ class FormSection extends Widget
      * @param DataStore $p_store   Data store used for displaying elements
      */
     
-    function displayContent(?DataStore $p_store=null)
+    function displayContent(DataStore $p_store):void
     {
         $this->theme->base_Form->sectionTitle($this->title->getValue($p_store));        
     }

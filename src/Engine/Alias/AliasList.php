@@ -19,8 +19,12 @@ use XMLView\Base\Base;
 
 class AliasList extends Base
 {   
-    
-    private $aliases;
+    /**
+     * Container for alias lists
+     * 
+     * @var array
+     */
+    private $aliases=[];
     
     
     /**
@@ -42,7 +46,7 @@ class AliasList extends Base
      * @param string $p_name     Name of alias
      * @return boolean           True - alias allready exists
      */
-    function hasAlias(string $p_name)
+    function hasAlias(string $p_name):bool
     {        
         return isset($this->aliases[$p_name]);
     }

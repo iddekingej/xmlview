@@ -94,7 +94,7 @@ class StaticText extends Widget
      * of the span is set.
      */
     
-    function displayContent(?DataStore $p_store):void
+    function displayContent(DataStore $p_store):void
     {
         if($this->text){
             $l_text=$this->getAttValue("text",$p_store);

@@ -38,7 +38,7 @@ class Note extends Widget{
         return $this->text;
     }
     
-    function displayContent(?DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
         if($this->text != null){
             $this->theme->page_Page->note($this->text->getValue($p_store));

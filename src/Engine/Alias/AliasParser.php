@@ -55,7 +55,7 @@ class AliasParser extends Base{
      * @param array $p_check          The node can only contains attribute in this array.
      * @throws XMLParserException     Exception is raised When object contains attribute that are not in p_check
      */
-    private function checkAttributes(\DOMNode $p_node,Array $p_check)
+    private function checkAttributes(\DOMNode $p_node,Array $p_check):void
     {
         $l_attributes=$p_node->attributes;
         for($l_cnt=0;$l_cnt<$l_attributes->length;$l_cnt++){
@@ -77,7 +77,7 @@ class AliasParser extends Base{
      * @param \DOMNode $p_node         Parse this node.
      * @throws XMLParserException      raised when the node have invalid attributes or is missing the 'name' or 'value' attribute.      
      */
-    private function parseAlias(string $p_base,\DOMNode $p_node)
+    private function parseAlias(string $p_base,\DOMNode $p_node):void
     {
         $l_type=$p_node->nodeName;
         $this->checkAttributes($p_node,["name"=>1,"value"=>1]);
@@ -124,7 +124,8 @@ class AliasParser extends Base{
      * 
      * @throws XMLParserException   When the file contains an invalid alias file
      */
-    function parse($p_file){
+    function parse($p_file):void
+    {
         $l_dom = new \DOMDocument();
         $l_file=xmlview_getAliasPath($p_file);
         if($l_dom->load($l_file)===false){

@@ -35,7 +35,7 @@ abstract class HtmlPage extends HtmlComponent
      * 
      * @param DynamicValue $p_title  String wrapped in a DynamicValue object
      */
-    function setTitle(DynamicValue $p_title)
+    function setTitle(DynamicValue $p_title):void
     {
         $this->title=$p_title;
     }
@@ -101,7 +101,7 @@ abstract class HtmlPage extends HtmlComponent
      * This is a temporary fix  and can be removed if all templates are moved to XML
      * In this method application specific html is generated
      */
-    function themeHeader()
+    function themeHeader():void
     {
         
     }

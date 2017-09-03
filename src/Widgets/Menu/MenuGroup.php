@@ -108,7 +108,7 @@ class MenuGroup extends Widget
      * @param HtmlComponent $p_component
      * @throws WrongWidgetTypeException
      */
-    function validateSubItem(HtmlComponent $p_component)
+    function validateSubItem(HtmlComponent $p_component):void
     {
         if(!($p_component instanceof MenuItem)){
             throw new WrongWidgetTypeException(MenuItem::class, $p_component);
@@ -116,7 +116,7 @@ class MenuGroup extends Widget
     }
     
    
-    function preDisplaySub(DataStore $p_store,Widget $p_item)
+    function preDisplaySub(DataStore $p_store,Widget $p_item):void
     {
         $l_tagValue="";
         $l_tag=$p_item->getTag();
@@ -134,7 +134,7 @@ class MenuGroup extends Widget
         }
     }
     
-    function postDisplaySub(DataStore $p_store,Widget $p_item)
+    function postDisplaySub(DataStore $p_store,Widget $p_item):void
     {
         $l_tagValue="";
         $l_tag=$p_item->getTag();

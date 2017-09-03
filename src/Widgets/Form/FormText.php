@@ -10,7 +10,7 @@ use XMLView\Engine\Data\DataStore;
  */
 class FormText extends FormInputElement
 {
-    function displayElement(?DataStore $p_store=null):void
+    function displayElement(DataStore $p_store):void
     {
         $this->theme->base_Form->textElement($this->getId(),$this->getName(),$this->getRealValue($p_store));
     }

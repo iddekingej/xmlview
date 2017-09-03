@@ -43,7 +43,7 @@ class DynamicBulletItem extends Widget
      * This routines iterates through the data. For each item the child element display is called
      * using the item as data. 
      */
-    function displayContent(?DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
         $l_data=$this->getAttValue("data",$p_store,"",true);
         $l_items=$this->subItems;

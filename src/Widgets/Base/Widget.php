@@ -127,7 +127,7 @@ abstract class Widget extends HtmlComponent
      * 
      * @param DataStore $p_store
      */
-    abstract function displayContent(DataStore $p_store);
+    abstract function displayContent(DataStore $p_store):void;
     
     
     /**
@@ -135,7 +135,7 @@ abstract class Widget extends HtmlComponent
      * The value is passed to displayContent in which the components is displayed.
      * 
      */
-    final function display(DataStore $p_store)
+    final function display(DataStore $p_store):void
     {
         if($this->getDataLayer()){
             $l_store=$this->getDataLayer()->processData($p_store);

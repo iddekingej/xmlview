@@ -32,7 +32,7 @@ class TopMenuConfirmItem extends TopMenuItemBase
      *
      * @param DatabaseStore $p_store Data used to get the values of the text,link and icon url
      */
-    function displayContent(?DatabaseStore $p_store)
+    function displayContent(DatabaseStore $p_store):void
     {
         if($this->getText() && $this->getRoute()){
             $l_text=$this->getValue("text",$p_store, "string",true);

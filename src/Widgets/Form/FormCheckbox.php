@@ -15,7 +15,7 @@ class FormCheckbox extends FormInputElement
      * @param p_store Data store used for calculating the value expression
      *                When value is true, a checkbox is displayed 
      */
-    function displayElement(?DataStore $p_store=null):void
+    function displayElement(DataStore $p_store):void
     {        
         $this->theme->base_Form->checkboxElement($this->getId(),$this->getName(),$this->getRealValue($p_store));        
     }

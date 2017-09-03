@@ -251,7 +251,7 @@ class Form extends Widget
     /**
      * Display form
       */
-    function displayContent(?DataStore $p_store=null)
+    function displayContent(DataStore $p_store):void
     {        
         
         /**

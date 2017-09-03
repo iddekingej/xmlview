@@ -2,7 +2,6 @@
 
 use XMLView\Engine\Alias\AliasManager;
 use XMLView\Engine\Alias\AliasException;
-use XMLView\Engine\Alias\AliasList;
 
 
 class EngineTest extends XMLViewTest

@@ -189,7 +189,7 @@ abstract class HtmlComponent extends Base
      * Set the alignment of the element inside the spacer 
      * @param string $p_align  Alignment:Align::LEFT, Align::RIGHT or Align::CENTER
      */
-    function setContainerAlign(DynamicValue $p_align)
+    function setContainerAlign(DynamicValue $p_align):void
     {        
         $this->containerAlign=$p_align;
     }
@@ -204,11 +204,12 @@ abstract class HtmlComponent extends Base
         return $this->containerAlign;
     }
     
-    function setCacheTag(string $p_param){
+    function setCacheTag(string $p_param):void
+    {
         $this->cacheTag=$p_param;
     }
     
-    function getCacheTag()
+    function getCacheTag():string
     {
         return $this->cacheTag;
     }
@@ -234,5 +235,5 @@ abstract class HtmlComponent extends Base
     /**
      * Display/Generator HTML of component.
      */
-    abstract function display(DataStore $p_store);
+    abstract function display(DataStore $p_store):void;
 }

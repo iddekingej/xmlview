@@ -30,7 +30,7 @@ class LeftMenu extends Widget
      * @param HtmlComponent $p_component    Child component added to the @see LeftMenu
      * @throws WrongWidgetTypeException     Whe component is invalid (not a MenuGroup)
      */
-    function validateSubItem(HtmlComponent $p_component)
+    function validateSubItem(HtmlComponent $p_component):void
     {
         if(!($p_component instanceof MenuGroup)){
             throw new WrongWidgetTypeException(MenuGroup::class, $p_component);

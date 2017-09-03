@@ -11,7 +11,7 @@ class BulletList extends Widget
 {
     use SubList;
     
-    function displayContent(?DataStore $p_store=null)
+    function displayContent(DataStore $p_store):void
     {
         $this->theme->base_BulletList->listHeader();
         foreach($this->subItems as $l_item) {

@@ -7,15 +7,33 @@ use XMLView\Base\Base;
 
 class AliasManager extends Base
 {
+    /**
+     * Alias parser used for parsing the alias xml
+     * 
+     * @var AliasParser
+     */
     static private $parser=null;
+    /**
+     * Aliases are stored in this list
+     *   
+     * @var AliasList
+     */
     static private $aliasList=null;
+    
+    /**
+     * The files that are used for defining aliases are stored in configuration files. 
+     * it is also possible to add extra files with addAliasFiles. These files are stored in this
+     * object variable.
+     * 
+     * @var array
+     */
     static private $aliasFiles=[];
 
     /**
      * Initialize the alias manage
      */
     
-    private static function init()
+    private static function init():void
     {
         static::$aliasList=new AliasList();
         static::$parser=new AliasParser(static::$aliasList);
@@ -27,7 +45,7 @@ class AliasManager extends Base
      * 
      * @param unknown $p_file  Alias file name
      */
-    static function addAliasFile($p_file)
+    static function addAliasFile($p_file):void
     {
         static::$aliasFiles[]=$p_file;
     }
@@ -37,7 +55,7 @@ class AliasManager extends Base
      * Before each test, the alias must be reset and reread. 
      */
     
-    static function resetAliases()
+    static function resetAliases():void
     {
         static::$aliasList=null;
         static::$parser=null;
@@ -50,7 +68,7 @@ class AliasManager extends Base
      * a call to addlAliasFiles
      * 
      */
-    static function loadAliases()
+    static function loadAliases():void
     {
         static::init();
         $l_aliasFiles=array_merge(xmlview_getAliasFiles(),static::$aliasFiles);

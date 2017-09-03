@@ -40,7 +40,7 @@ abstract class InfoTableItem extends Widget
      */
     abstract function displayValue(DataStore $p_store):void;
     
-    function displayContent(?DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
         $l_label=$this->getAttValue("label", $p_store,"string",true);
         $this->theme->base_InfoTable->ItemHeader($l_label);

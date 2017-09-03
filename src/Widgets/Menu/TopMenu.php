@@ -32,7 +32,7 @@ class TopMenu extends Widget
     /**
      * TopMenu can only have childeren based on the @see TopMenuItemBase widget.
      */
-     function validateSubItem(HtmlComponent $p_compontent)
+     function validateSubItem(HtmlComponent $p_compontent):void
      {
          if(!$p_compontent instanceof TopMenuItemBase){
              throw new WrongWidgetTypeException(TopMenuItemBase::class, $p_compontent) ;

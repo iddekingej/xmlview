@@ -16,7 +16,7 @@ class FormPassword extends FormInputElement
      * Displays a password input element
      */
     
-    function displayElement(?DataStore $p_store=null):void
+    function displayElement(DataStore $p_store):void
     {
         $this->theme->base_Form->password($this->getId(),$this->getName(),$this->getRealValue($p_store));        
     }

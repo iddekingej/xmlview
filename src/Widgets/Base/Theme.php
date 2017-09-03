@@ -49,7 +49,7 @@ class Theme
      * @param string  $p_name attribute name     
      * @param unknown $p_value attribute value
      */
-    function attribute(string $p_name,$p_value)
+    function attribute(string $p_name,$p_value):void
     {
         echo $p_name,'="',$this->e($p_value).'" ';
     }
@@ -60,7 +60,7 @@ class Theme
      * @param string $p_src   Image url
      * @param string $p_class Css class of image
      */
-    function image($p_src,$p_class="")
+    function image($p_src,$p_class=""):void
     {
         echo "<img ";
         $this->attribute("src",$p_src);
@@ -95,7 +95,7 @@ class Theme
      * @param unknown $p_text    Text of url
      * @param string $p_class    Css class of url. Default no class
      */
-    function textRouteLink($p_route,Array $p_params,$p_text,$p_class="")
+    function textRouteLink($p_route,Array $p_params,$p_text,$p_class=""):void
     {
         $this->textLink(Route($p_route,$p_params),$p_text,$p_class);
     }
@@ -107,7 +107,7 @@ class Theme
      * @param unknown $p_text   Text of link
      * @param string $p_class   Css class of url. Default no class
      */
-    function textLink($p_url,$p_text,$p_class="")
+    function textLink($p_url,$p_text,$p_class=""):void
     {
         ?><a <?php if($p_class != ""){ $this->attribute("class",$p_class);}?> href="<?=$this->e($p_url)?>"><?=$this->e($p_text)?></a><?php
     }
@@ -118,7 +118,7 @@ class Theme
      * @param unknown $p_image  Image displayed in link
      * @param unknown $p_text   Text in link
      */
-    function imageTextLink($p_url,$p_image,$p_text)
+    function imageTextLink($p_url,$p_image,$p_text):void
     {
         ?><a href="<?=$this->e($p_url)?>"><img src="<?=$this->e($p_image)?>" /><?=$this->e($p_text)?></a><?php   
     }
@@ -128,7 +128,7 @@ class Theme
        ?><a href="<?=$this->e(route($p_route,$p_data))?>"><?php $this->image($p_icon)?></a><?php 
     }
 
-    function iconTextRouteLink($p_route,array $p_params,$p_image,$p_text)
+    function iconTextRouteLink($p_route,array $p_params,$p_image,$p_text):void
     {
         ?><a href="<?=$this->e(Route($p_route,$p_params))?>"><img src="<?=$this->e($p_image)?>" /></a><a href="<?=$this->e(Route($p_route,$p_params))?>"><?=$this->e($p_text)?></a><?php
     }
@@ -156,7 +156,7 @@ class Theme
      * @param
      *            String Url url location to go when confirmed
      */
-    function confirmJs(String $p_message,String $p_url)
+    function confirmJs(String $p_message,String $p_url):string
     {
         return "if(confirm(" . json_encode($p_message) . "))window.location=" . json_encode($p_url);
     }
@@ -198,12 +198,12 @@ class Theme
         return $this->tag("div");
     }      
     
-    function jsStart()
+    function jsStart():void
     {
         ?><script type='text/javascript'><?php 
     }
     
-    function jsEnd()
+    function jsEnd():void
     {
         ?></script><?php 
     }

@@ -16,7 +16,7 @@ abstract class FormInputElement extends FormElement
      *  
      * @param DataStore $p_store  Data used for calculating the value of the input element
      */
-    abstract function displayElement(DataStore $p_store=null);
+    abstract function displayElement(DataStore $p_store):void;
     
 /**
  * Indicates that element has a value
@@ -32,7 +32,7 @@ abstract class FormInputElement extends FormElement
      * DisplayElement should display the input element it self  
      */
     
-    final function displayContent(?DataStore $p_store=null)
+    final function displayContent(DataStore $p_store):void
     {
         $this->theme->base_Form->rowHeader($this->getName(),$this->getLabel()->getValue($p_store),$this->getError(),$this->getRowId());
         $this->theme->base_Form->elementHeader();

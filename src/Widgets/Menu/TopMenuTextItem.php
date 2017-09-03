@@ -16,7 +16,7 @@ class TopMenuTextItem extends TopMenuItemBase
      * 
      * @param DataStore $p_store Data used to get the values of the text,link and icon url
      */
-    function displayContent(?DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
         if($this->getText() && $this->getRoute()){
             $l_text=$this->getAttValue("text",$p_store, "string",true);

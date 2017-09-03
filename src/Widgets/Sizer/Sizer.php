@@ -11,7 +11,7 @@ abstract class Sizer extends Widget
 {
     use SubList;
     
-    function displayItem(Widget $p_widget,DataStore $p_store)
+    function displayItem(Widget $p_widget,DataStore $p_store):void
     {
         $l_css="";
         

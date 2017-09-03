@@ -84,7 +84,7 @@ trait SubList{
  * 
  * @return Array  An list of HtmlComponent objects that are sub elements
  */
-    function getSubItems()
+    function getSubItems():array
     {
         return $this->subItems;
     }
@@ -95,7 +95,8 @@ trait SubList{
  * @param HtmlComponent $p_component HtmlComponent to be added as subitem
  * @return \App\Vc\Lib\HtmlComponent Is the same as $p_component
  */    
-    function add(HtmlComponent $p_component){
+    function add(HtmlComponent $p_component):HtmlComponent
+    {
         
         $this->validateSubItem($p_component);
         $this->subItems[]=$p_component;
