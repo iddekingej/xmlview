@@ -285,7 +285,7 @@ class Form extends Widget
         if($l_cancelUrl){
             $l_cancelText=$this->getAttValue("cancelText", $p_store,"string",false);
             $l_js="window.location=".json_encode($l_cancelUrl);
-            $this->theme->base_Form->submitCancelButton($l_cancelText?$$l_cancelText:__("Cancel"),$l_js);
+            $this->theme->base_Form->submitCancelButton($l_cancelText?$l_cancelText:__("Cancel"),$l_js);
         }
 
         $this->theme->base_Form->submitFooter();
@@ -298,7 +298,7 @@ class Form extends Widget
         l_form.elementNames=<?=json_encode(array_keys($this->elements))?>;
         <?php 
         $this->generateConditionJs();
-        ?>        l_form.setup();
+        ?>l_form.setup();
         <?php 
         $this->theme->jsEnd();
     }

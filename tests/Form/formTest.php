@@ -7,6 +7,8 @@ use XMLView\Engine\Data\DynamicStaticValue;
 use XMLView\Widgets\Form\FormPassword;
 class formTest extends XMLViewTest
 {
+    const CANCEL_TEXT="BLA##XX123aa";
+    const CANCEL_URL="xx123AA";
     function testForm1()
     {
         $l_store=new MapData(null);
@@ -29,5 +31,18 @@ class formTest extends XMLViewTest
         $l_store= new MapData(null,["bla"=>"xxuvv"]);
         $this->expectOutputRegex("/bla(.*)[\"]xxuvv[\"]/s");
         $l_widget->display($l_store);
+    }
+    
+    function testCancelButton()
+    {
+        $l_form=new Form();
+        $l_form->setCancelText(new DynamicStaticValue(static::CANCEL_TEXT));
+        $l_form->setcancelUrl(new DynamicStaticValue(static::CANCEL_URL));
+        $l_store=new MapData(null);
+        $l_page=new  TestPage();
+        $l_page->add($l_form);
+        $this->expectOutputRegex("/".static::CANCEL_TEXT.".*".static::CANCEL_URL."/s");
+        $l_page->display($l_store);
+             
     }
 }
