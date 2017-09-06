@@ -13,17 +13,11 @@ abstract class TopMenuItemBase extends Widget{
     private $text;
     
     /**
-     * Route used in url when clicking the menu item
-     * @var DynamicValue
+     * URL of link used in menu item
+     *
+     * @var DynamicValue   Url string wrapped in  a DynamicValue object
      */
-    private $route;
-    
-    /**
-     * Parameters used in the url when clicking the menu item (can be empty)
-     * @var DynamicValue
-     */
-    private $params;
-    
+    private $url;
     /**
      * @var DynamicValue
      */
@@ -49,41 +43,28 @@ abstract class TopMenuItemBase extends Widget{
         return $this->text;
     }
     
+
+    
     /**
-     * Set the route url used when clicking the menu item
+     * Set the menu URL .
+     * This parameter is mandatory
      *
-     * @param DynamicValue $p_route
+     * @param DynamicValue $p_url URL string wrapped in a DynamicObject
      */
-    function setRoute(DynamicValue $p_route):void
+    function setUrl(DynamicValue $p_url):void
     {
-        $this->route=$p_route;
+        $this->url=$p_url;
     }
     
     /**
-     * Set the parameters used in the URL when the menu item is selected
-     * 
-     * @param DynamicValue $p_params Parameters for the URL. The encapsulated value should be a array.
-     */
-    function setParams(DynamicValue $p_params):void
-    {
-        $this->params=$p_params;
-    }
-    
-    function getParams():?DynamicValue
-    {
-        return $this->params;
-    }
-    
-    /**
-     * Get the route of the url used when the menu is selected.
+     * Get the menu Url
      *
-     * @return DynamicValue|NULL
+     * @return DynamicValue|NULL Menu URL wrappedi n a DynamicObject
      */
-    function getRoute():?DynamicValue
+    function getUrl():?DynamicValue
     {
-        return $this->route;
+        return $this->url;
     }
-    
     /**
      * Get the icon displayed on the front of the menu item. When empty, no icon
      * is displayed

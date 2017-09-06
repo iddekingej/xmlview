@@ -47,10 +47,10 @@ class ResourceView extends Base
     function display():void
     {
         $l_gui=new \stdClass();
-        $l_file=PageLoader::getCompiled($this->fileName);
-        $l_page=require_once $l_file;
+        $l_file=PageLoader::getCompiled($this->fileName);        
+        $l_page=require $l_file;
         if(!$l_page instanceof XMLResourcePage){
-            throw new WrongWidgetTypeException(XMLResourcePage::class, $l_page);
+            throw new WrongWidgetTypeException(XMLResourcePage::class, $l_page,"[",$l_file,"]");
         }
         $l_page->setGui($l_gui);
         $l_store=new MapData(null,$this->data);

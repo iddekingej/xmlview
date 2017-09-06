@@ -7,8 +7,8 @@ use XMLView\Engine\Data\DataStore;
 
 class TopMenuTextItem extends TopMenuItemBase
 {
- 
-    
+
+
     /**
      * Displays the menu item.
      * The menu item is a text link to some given url. There can be a icon
@@ -18,17 +18,12 @@ class TopMenuTextItem extends TopMenuItemBase
      */
     function displayContent(DataStore $p_store):void
     {
-        if($this->getText() && $this->getRoute()){
-            $l_text=$this->getAttValue("text",$p_store, "string",true);
-            $l_route=$this->getAttValue("route",$p_store, "string",true);
-            $l_params=$this->getAttValue("params",$p_store,"array",false);
-            $l_icons=$this->getAttValue("icon",$p_store,"string");
-
-            if($l_params===null){
-                $l_params=[];
-            }
+        
+        $l_text=$this->getAttValue("text",$p_store, "string",true);
+        $l_url=$this->getAttValue("url",$p_store,"string",true);
+        $l_icons=$this->getAttValue("icon",$p_store,"string");
             
-            $this->theme->menu_TopMenu->topMenuItem($l_route, $l_params, $l_text, $l_icons);
-        }
+        $this->theme->menu_TopMenu->topMenuItem($l_url, $l_text, $l_icons);
+        
     }
 }

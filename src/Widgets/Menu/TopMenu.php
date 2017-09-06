@@ -48,9 +48,7 @@ class TopMenu extends Widget
     {
         if($this->subItems){
             $this->theme->menu_TopMenu->topMenuHeader();
-            foreach($this->subItems as $l_item){
-                $l_item->display($p_store);
-            }
+            $this->displaySub($p_store);
            $this->theme->menu_TopMenu->topMenuFooter();
         }
     }

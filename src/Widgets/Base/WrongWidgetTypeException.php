@@ -11,7 +11,12 @@ use XMLView\Base\Base;
 class WrongWidgetTypeException extends \Exception
 {
     
-    function __construct(string $p_expected,Base $p_found){
-        parent::__construct(__("Wrong type of widget ':found', this object doesn't descent from ':expected' excpected",["found"=>get_class($p_found),"expected"=>$p_expected]));
+    function __construct(string $p_expected,Base $p_found,$p_file=""){
+        if($p_file){
+            $l_text=__("Wrong type of widget ':found', this object doesn't descent from ':expected' excpected. Object read from resource file :file",["found"=>get_class($p_found),"expected"=>$p_expected,"file"=>$p_file]);
+        } else {
+            $l_text=__("Wrong type of widget ':found', this object doesn't descent from ':expected' excpected",["found"=>get_class($p_found),"expected"=>$p_expected]);
+        }
+        parent::__construct();
     }
 }

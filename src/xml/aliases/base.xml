@@ -19,4 +19,6 @@
     <element name="horizontalSizer"    value="Sizer\HorizontalSizer" />
     <element name="verticalSizer"      value="Sizer\VerticalSizer" />
     <element name="iconTextLink"       value="Link\IconTextLink" />
+    <element name="tabMenu"            value="Menu\TabMenu" />'
+    <element name="tabMenuItem"        value="Menu\TabMenuItem" />
 </aliases>

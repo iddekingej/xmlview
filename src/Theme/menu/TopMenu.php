@@ -13,11 +13,11 @@ class TopMenu extends ThemeItem
 	<?php
     }
 
-    function topMenuItem($p_route, Array $p_parameters, $p_title,$p_icon)
+    function topMenuItem($p_url, $p_title,$p_icon)
     {
         ?>
 		<span class="topMenuItem">
-			<a class='topMenuLink' href='<?=route($p_route,$p_parameters)?>'>
+			<a class='topMenuLink' href='<?=$this->e($p_url)?>'>
 			<?php if($p_icon){?>
 			<img src='<?=$p_icon?>' />
 			<?php }?>
