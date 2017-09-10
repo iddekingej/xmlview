@@ -20,6 +20,10 @@ class TopMenuConfirmItem extends TopMenuItemBase
         $this->confirmMessage = $p_confirmMessage;        
     }
     
+    /**
+     * Get the confirm message
+     * @return DynamicValue|NULL Confirm message. This is a string wrapped in a DynamicValue
+     */
     function getConfirmMessage():?DynamicValue
     {
         return $this->confirmMessage;

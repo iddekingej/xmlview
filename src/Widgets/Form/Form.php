@@ -183,14 +183,15 @@ class Form extends Widget
      * 
      * @return array Return data used in form
      */
-    protected function preForm(?DataStore $p_store):DataStore
-    {       
-        
+    protected function preForm(DataStore $p_store):DataStore
+    {
         $l_newValues=[];
-        foreach($this->elements as $l_name=>&$l_element){
+        foreach($this->elements as $l_name=>$l_element){
             if($l_element->hasData()){
                 $l_value=$p_store->getValue($l_name);
+
                 $l_newValue=xmlview_old($l_name,$l_value);
+
                 if($l_newValue != $l_value ){
                     $l_newValues[$l_name]=$l_newValue;
                 }

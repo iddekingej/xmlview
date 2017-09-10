@@ -21,7 +21,7 @@ class Note extends Widget{
 
     /**
      * Set the text of the node 
-     * @param DynamicValue $p_text    
+     * @param DynamicValue $p_text   
      */
     function setText(DynamicValue $p_text):void
     {
@@ -29,7 +29,7 @@ class Note extends Widget{
     }
     
     /**
-     * Get text of the note
+     * Get the text of the note
      * 
      * @return DynamicValue
      */
@@ -37,6 +37,12 @@ class Note extends Widget{
     {
         return $this->text;
     }
+    
+    /**
+     * Displayes the note
+     * 
+     * @param DataStore $p_store Data used for displaying the note messsage
+     */
     
     function displayContent(DataStore $p_store):void
     {

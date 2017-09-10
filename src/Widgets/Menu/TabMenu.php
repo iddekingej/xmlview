@@ -7,17 +7,38 @@ use XMLView\Engine\Data\DynamicValue;
 use XMLView\Base\SubList;
 use XMLView\Engine\Data\DataStore;
 use XMLView\Widgets\Base\HtmlComponent;
+
+/** 
+ * A tab menu is a horizontal menu with items
+ * displayed as a tab
+ *
+ */
 class TabMenu extends Widget
 {
     use SubList;
     
+    /**
+     * The tag of the current selected item
+     * 
+     * @var DynamicValue
+     */
     private $currentTag;
     
+    /**
+     * Set the current tag of the current selected menu
+     * 
+     * @param DynamicValue $p_tag
+     */
     function setCurrentTag(DynamicValue $p_tag)
     {
         $this->currentTag=$p_tag;
     }
     
+    
+    /**
+     * Get the current tag
+     * @return DynamicValue
+     */
     function getCurrentTag():DynamicValue
     {
         return $this->currentTag;
@@ -33,6 +54,11 @@ class TabMenu extends Widget
         }
     }
     
+    /**
+     * Display the menu
+     *
+     * @param DataStore $p_store Data used for the 
+     */
     function displayContent(DataStore $p_store):void
     {
         $this->theme->menu_TabMenu->menuHeader();
