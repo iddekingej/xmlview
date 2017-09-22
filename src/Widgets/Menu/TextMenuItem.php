@@ -92,6 +92,6 @@ class TextMenuItem extends MenuItem
         if($l_params===null){
             $l_params=[];
         }
-;        $this->theme->menu_LeftMenu->menuItem($l_route,$l_params,$l_text);
+        $this->theme->menu_LeftMenu->menuItem($l_route,$l_params,$l_text);
     }
 }

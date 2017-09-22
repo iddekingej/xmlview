@@ -35,6 +35,16 @@ abstract class Table extends Widget{
     const ICONLINKCONFIRM="@iconlinkconfirm";
     const LINK="@link";
     
+    function setTitle(DynamicValue $p_title)
+    {
+        $this->title=$p_title;
+    }
+    
+    function getTitle():?DynamicValue
+    {
+        return $this->title;
+    }
+    
     function setData(DynamicValue $p_data)
     {
         $this->data=$p_data;

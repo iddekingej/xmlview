@@ -64,16 +64,7 @@ class Form extends ThemeItem
         ?></td></tr><?php 
     }
     
-    function submitHeader($p_submitText)
-    {
-        ?><tr><td colspan='2'><input type='submit' value="<?=$this->e($p_submitText)?>" /><?php 
-    }
-    
-    function submitCancelButton($p_text,$p_js)
-    {
-       ?><input type='button' value="<?=$this->e($p_text)?>" onclick="<?=$this->e($p_js)?>"/> <?php 
-    }
-    
+  
     function textElement($p_id,$p_name,$p_value)
     {
         ?><input id="<?=$this->e($p_id)?>" type="text" name="<?=$this->e($p_name)?>" value="<?=$this->e($p_value)?>" style="width:100%"/><?php
@@ -105,6 +96,18 @@ class Form extends ThemeItem
     {
         ?><tr><td colspan=2><div class="formSectionTitle"> <?=$this->e($p_title)?> </div></td></tr><?php    
     }
+    
+    function submitHeader($p_submitText)
+    {
+        ?><tr><td colspan='2'><input type='submit' value="<?=$this->e($p_submitText)?>" /><?php
+    }
+    
+    function submitCancelButton($p_text,$p_js)
+    {
+       ?><input type='button' value="<?=$this->e($p_text)?>" onclick="<?=$this->e($p_js)?>"/> <?php 
+    }
+    
+    
     function submitFooter()
     {
      ?></td></tr><?php   

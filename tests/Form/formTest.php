@@ -9,11 +9,12 @@ class formTest extends XMLViewTest
 {
     const CANCEL_TEXT="BLA##XX123aa";
     const CANCEL_URL="xx123AA";
+    const SUBMIT_URL="http://localhost";
     function testForm1()
     {
         $l_store=new MapData(null);
         $l_form=new Form();
-        $l_form->setUrl(new DynamicStaticValue("http://localhost"));
+        $l_form->setUrl(new DynamicStaticValue(static::SUBMIT_URL));
         $l_store->setValue("bla",1);
         $l_page=new  TestPage();
         $l_page->add($l_form);
