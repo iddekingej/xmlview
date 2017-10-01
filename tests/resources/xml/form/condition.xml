@@ -1,0 +1,3 @@
+<form name="xx">
+    <formText name="yy" condition="zz ${ee}"/>
+</form>
