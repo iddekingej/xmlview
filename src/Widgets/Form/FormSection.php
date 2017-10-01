@@ -9,7 +9,7 @@ use XMLView\Engine\Data\DataStore;
  * Class used for a form section title
  *
  */
-class FormSection extends Widget
+class FormSection extends FormElement
 {
     /**
      * Section title

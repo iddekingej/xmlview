@@ -6,4 +6,5 @@
     <element name="formSection"  value="FormSection" />
     <element name="formText"     value="FormText" />
     <element name="formTextArea" value="FormTextArea" /> 
+    <element name="formRepeat"   value="FormRepeat" />
 </aliases>

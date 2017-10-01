@@ -26,7 +26,7 @@ use XMLView\Engine\Data\DynamicValue;
  */
 abstract class Table extends Widget{
     private $config=[];
-    protected $title;
+    private $title;
     protected $data;
     protected $custom=[];
     const TEXT="@text";

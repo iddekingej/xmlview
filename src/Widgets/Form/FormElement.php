@@ -14,6 +14,7 @@ abstract class FormElement extends Widget
     private $label;
     private $error="";
     private $condition;
+    private $elementName;
     
     function setError(string $p_error):void
     {
@@ -30,7 +31,7 @@ abstract class FormElement extends Widget
         $this->rowId=$p_rowId;
     }
     
-    function getRowId():string
+    function getRowId():?string
     {
         return $this->rowId;
     }
@@ -40,7 +41,7 @@ abstract class FormElement extends Widget
         $this->id=$p_id;
     }
     
-    function getId():string
+    function getId():?string
     {
         return $this->id;
     }
@@ -84,6 +85,22 @@ abstract class FormElement extends Widget
     function getCondition()
     {
         return $this->condition;
+    }
+    function setElementName(DynamicValue $p_elementName):void
+    {
+        $this->elementName=$p_elementName;
+    }
+    function getElementName():?DynamicValue
+    {
+        return $this->elementName;
+    }
+    
+    function getRealElementName(DataStore $p_store)
+    {
+        if($this->elementName!== NULL){
+            return $this->getAttValue("elementname",$p_store,"string",true);
+        }
+        return $this->getName();
     }
 
 }

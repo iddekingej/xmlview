@@ -235,15 +235,19 @@ class Form extends Widget
         
     }    
     
-    function generateConditionJs()
+    function generateConditionJs(DataStore $p_store)
     {
+        
         ?>l_form.checkConditions=function(){
         	var form=this.form;
         <?php
         foreach($this->elements as $l_name=>$l_element){
-            if($l_element->getCondition()){
-                ?>this.showElement(<?=json_encode($l_name)?>,<?=$l_element->getCondition()?>);
-                <?php 
+            if($l_element->getCondition()){                
+                $l_condition=$l_element->getAttValue("condition",$p_store,"string");
+                if($l_condition){
+                    ?>this.showElement(<?=json_encode($l_name)?>,<?=$l_condition?>);
+                <?php
+                }
             }       
         }
         ?>};<?php
@@ -261,7 +265,9 @@ class Form extends Widget
         
        
         $this->setup();
-        $this->errors=$this->getPage()->getErrors();
+        if($this->getPage()){
+            $this->errors=$this->getPage()->getErrors();
+        }
         if($this->errors){
             foreach ($this->elements as $l_element) {
                 
@@ -298,7 +304,7 @@ class Form extends Widget
         var l_form=new form(<?=json_encode($this->id)?>);
         l_form.elementNames=<?=json_encode(array_keys($this->elements))?>;
         <?php 
-        $this->generateConditionJs();
+        $this->generateConditionJs($p_store);
         ?>l_form.setup();
         <?php 
         $this->theme->jsEnd();

@@ -5,7 +5,7 @@ require_once "BaseDummy.php";
 class baseTest extends XMLViewTest
 {
     /**
-     * Test if UnknownPropertyException is raised when accessing unkown property
+     * Test if UnknownPropertyException is raised when accessing unknown property
      */
     function testUnkProperties()
     {
