@@ -13,6 +13,11 @@ function xmlview_cachePath($p_source)
     return __DIR__."/resources/cache/".$p_source;
 }
 
+function xmlview_viewCachePath($p_source)
+{
+    return __DIR__."/resources/cache/".$p_source;
+}
+
 function xmlview_getAliasFiles()
 {
     return ["aliases/base.xml","aliases/form.xml"];

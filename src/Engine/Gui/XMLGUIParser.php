@@ -21,6 +21,11 @@ class XMLGUIParser extends XMLClassParser
         return new XMLGUIParser($this->getParseData());
     }
     
+    function getRealPath(string $p_file):string
+    {
+        return xmlview_viewPath($p_file);
+    }
+    
     function setupHandlers():void
     {        
         $this->addHandler("page",new XMLClassHandler(XMLResourcePage::class, XMLResourcePage::class, null,""));

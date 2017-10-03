@@ -231,16 +231,21 @@ abstract class XMLClassParser
      */
     abstract function newParser():XMLClassParser;
     
-    function createWriter()
+    function createWriter():XMLStatementWriter
     {
         return new XMLStatementWriter();
+    }
+    
+    function getRealPath(string $p_file):string
+    {
+        return xmlview_resourcePath($p_file);
     }
     
     public function parseXMLToAST(string $p_file,?ObjectNode $p_parent=null)
     {
         $this->setupHandlers();
         $l_dom = new \DOMDocument();
-        $l_fullFileName=xmlview_resourcePath($p_file);
+        $l_fullFileName=$this->getRealPath($p_file);
         if($l_dom->load($l_fullFileName)===false){
             throw new XMLParserException(__("Invalid XML"),null);
         }

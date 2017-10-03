@@ -21,10 +21,17 @@ function xmlview_resourcePath($p_path)
     return base_path(config("hr.xmlBasePath").$p_path);
 }
 
+function xmlview_viewPath($p_path)
+{
+    return base_path(config("hr.xmlViewPath").$p_path);
+}
+
+
 function xmlview_cachePath($p_source)
 {
     return  base_path(config("hr.xmlCache").$p_source.".php");
 }
+
 
 function xmlview_getAliasFiles()
 {

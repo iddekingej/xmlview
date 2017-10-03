@@ -46,7 +46,7 @@ class PageLoader extends Base
      */
     static function getCompiled(string $p_source):string
     {        
-        $l_source=xmlview_resourcePath($p_source);
+        $l_source=xmlview_viewPath($p_source);
         $l_cached=xmlview_cachePath($p_source);
         $l_depBase=dirname($p_source)."/dep__".basename($p_source);
         $l_dep = xmlview_cachePath($l_depBase);
