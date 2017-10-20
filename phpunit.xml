@@ -12,10 +12,12 @@
     <testsuites>
         <testsuite name="xmlviewTests">
             <directory suffix="Test.php"> ./tests/Base</directory>
-            <directory suffic="Test.php"> ./tests/Parser</directory>
-            <directory suffic="Test.php"> ./tests/Data</directory>
-            <directory suffic="Test.php"> ./tests/Form</directory>
-            <directory suffic="Test.php"> ./tests/Widgets</directory>
+            <directory suffix="Test.php"> ./tests/Parser</directory>
+            <directory suffix="Test.php"> ./tests/Data</directory>
+            <directory suffix="Test.php"> ./tests/Form</directory>
+        </testsuite>
+        <testsuite name="widgets">
+            <directory suffix="Test.php"> ./tests/Widgets</directory>
         </testsuite>
      </testsuites>
 </phpunit>    

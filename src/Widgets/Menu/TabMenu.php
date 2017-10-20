@@ -39,7 +39,7 @@ class TabMenu extends Widget
      * Get the current tag
      * @return DynamicValue
      */
-    function getCurrentTag():DynamicValue
+    function getCurrentTag():?DynamicValue
     {
         return $this->currentTag;
     }

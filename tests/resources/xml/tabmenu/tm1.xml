@@ -1,0 +1,7 @@
+<page title="Select trace">
+    <tabMenu name="tabMenu">
+        <tabMenuItem text="__Cancel" tag="cancel">
+            <url for="setUrl" route="routes" />
+        </tabMenuItem>
+    </tabMenu>
+</page>

@@ -8,6 +8,11 @@ function xmlview_resourcePath($p_path)
     return __DIR__."/resources/".$p_path;
 }
 
+function xmlview_viewPath($p_path)
+{
+    return __DIR__."/resources/".$p_path;
+}
+
 function xmlview_cachePath($p_source)
 {
     return __DIR__."/resources/cache/".$p_source;
@@ -31,6 +36,11 @@ function xmlview_getAliasPath($p_path)
 function csrf_token()
 {
     return "XXXXXX1234";
+}
+
+function session($p_name)
+{
+    return null;
 }
 
 function __(string $p_text,array $p_params=[]):string

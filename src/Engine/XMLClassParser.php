@@ -5,13 +5,14 @@ use XMLView\Engine\Parser\ObjectNode;
 use XMLView\Base\HashMap;
 use XMLView\Engine\Alias\AliasManager;
 use XMLView\Engine\Parser\ParseData;
+use XMLView\Base\Base;
 
 /**
  * XML files uses a kind of 'bean' technology. Each node is converted to a object.
  * nested node are child object of parent node
  *
  */
-abstract class XMLClassParser
+abstract class XMLClassParser extends Base
 {
     /**
      * Node handlers. 
