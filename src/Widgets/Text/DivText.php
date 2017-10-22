@@ -4,6 +4,8 @@ namespace XMLView\Widgets\Text;
 
 use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DataStore;
+use XMLView\Engine\Data\DynamicValue;
+use XMLView\Engine\Data\DynamicStaticValue;
 
 class DivText extends Widget
 {
@@ -45,9 +47,9 @@ class DivText extends Widget
         return $this->text;
     }
     
-    function displayContent(DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
-        $l_text=$this->getAttValue("text",$p_store,"string","true");
+        $l_text=$this->getAttValue("text",$p_store,"string",true);
         $this->theme->base_Text->divText($this->getBlockClass($p_store),$l_text);
     }
 }

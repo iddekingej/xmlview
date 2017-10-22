@@ -4,7 +4,6 @@ namespace XMLView\Widgets\Lists;
 
 use XMLView\Engine\Data\DynamicValue;
 use XMLView\Engine\Data\DataStore;
-use XMLView\Theme;
 
 /**
  * This component is one row in the InfoTable component

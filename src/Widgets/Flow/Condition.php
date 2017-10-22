@@ -5,13 +5,15 @@ namespace XMLView\Widgets\Flow;
 use XMLView\Engine\Data\DynamicValue;
 use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DataStore;
+use XMLView\Base\SubList;
 
 /**
  * When conditionValue==true: HTML is generated from the sub elements 
  *                      false: No html or js is generated.
  */
 class Condition extends Widget{
-    use SubItems{
+    use SubList
+    {
         getJs as private getJsTrait;
         getCss as private getCssTrait;
     }
@@ -21,7 +23,7 @@ class Condition extends Widget{
     /**
      * Get all JS url's used by all it's child widgets 
      */
-    function getJs(DataStore $p_store)
+    function getJs(DataStore $p_store):array
     {
         if($this->conditionValue){
             return $this->getJsTrait($p_store);
@@ -32,7 +34,7 @@ class Condition extends Widget{
     /**
      * Get all the CSS that is used by all it's child widgets
      */
-    function getCss(DataStore $p_store)
+    function getCss(DataStore $p_store):array
     {
         if($this->conditionValue){
             return $this->getCssTrait($p_store);
@@ -54,12 +56,12 @@ class Condition extends Widget{
         return $this->conditionValue;
     }
     
-    function displayContent(DataStore $p_store)
+    function displayContent(DataStore $p_store):void
     {
-        $l_conditionValue=$this->getAttValue("conditioNValue", $p_store,"bool",true);
+        $l_conditionValue=$this->getAttValue("conditionValue", $p_store,"boolean",true);
         if($l_conditionValue){
             foreach($this->subItems as $l_item){
-                $l_item->display();
+                $l_item->display($p_store);
             }
         }
     }

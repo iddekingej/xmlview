@@ -10,7 +10,7 @@ use XMLView\Widgets\Text\DivText;
  * Check @see StaticText widget
  *
  */
-class staticTextTest extends XMLViewTest
+class divTextTest extends XMLViewTest
 {
     CONST TEXT="bla xxx <a>ddfsdf";
     

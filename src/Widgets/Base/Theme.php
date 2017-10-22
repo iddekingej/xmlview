@@ -16,9 +16,9 @@ class Theme
     /**
      * Get theme singleton     
      */
-    static function new()
+    static function new():Theme
     {
-        if(static::$theme===null){
+        if(static::$theme===null){            
             static::$theme=new Theme();
         }
         return static::$theme;
@@ -32,17 +32,25 @@ class Theme
      */
     function __get($p_name)
     {
-        $l_appBase="app_";
-        if(substr($p_name,0,strlen($l_appBase))==$l_appBase){
+        $l_className=$this->nameToClass($p_name);
+        $this->$p_name=new $l_className($this);
+        return $this->$p_name;
+    }
+    
+    function nameToClass(string $p_name):string
+    {
+      $l_appBase="app_";
+      if(substr($p_name,0,strlen($l_appBase))==$l_appBase){
             $l_name=str_replace("_", "\\", substr($p_name,strlen($l_appBase)));
             $l_className="App\\Vc\\Theme\\${l_name}";//ToDo: settings for default NS?
         }  else {
             $l_name=str_replace("_", "\\", $p_name);
             $l_className="XMLView\\Theme\\$l_name";
         }
-        $this->$p_name=new $l_className($this);
-        return $this->$p_name;
+        return $l_className;
+    
     }
+    
     /**
      * Outputs html attribute and escapes value
      * 

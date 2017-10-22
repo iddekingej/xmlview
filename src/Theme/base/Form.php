@@ -72,7 +72,7 @@ class Form extends ThemeItem
     
     function password($p_id,$p_name,$p_value)
     {
-        ?><input type="password" name="<?=$this->e($p_name)?>" value="<?=$this->e($p_value)?>" style="width:100%" /><?php
+        ?><input id='<?=$this->e($p_id)?>' type="password"  name="<?=$this->e($p_name)?>" value="<?=$this->e($p_value)?>" style="width:100%" /><?php
     }
     
     function checkboxElement($p_id,$p_name,$p_checked)
