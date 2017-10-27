@@ -19,24 +19,24 @@ class TopMenu extends ThemeItem
 		<span class="topMenuItem">
 			<a class='topMenuLink' href='<?=$this->e($p_url)?>'>
 			<?php if($p_icon){?>
-			<img src='<?=$p_icon?>' />
+			<img src='<?=self::e($p_icon)?>' />
 			<?php }?>
-			<?=htmlspecialchars($p_title)?>
+			<?=self::e($p_title)?>
 			</a>
 		</span>
 	<?php
     }
 
-    function topMenuItemConfirm($p_route, Array $p_parameters, $p_title,$p_icon, $p_message)
+    function topMenuItemConfirm(string $p_url, string $p_title,?string $p_icon, string $p_message):void
     {
-        $l_js = $this->theme->confirmJs($p_message, route($p_route, $p_parameters));
+        $l_js = $this->theme->confirmJs($p_message, $p_url);
         ?>
 			<span class="topMenuItem">
 				<a class='topMenuLink' href='#' onclick='<?=self::e($l_js)?>'>
 				<?php if($p_icon){?>
-					<img src='<?=$p_icon?>' />
+					<img src='<?=self::e($p_icon)?>' />
 				<?php }?>
-				<?=htmlspecialchars($p_title)?>
+				<?=self::e($p_title)?>
 				</a>
 			</span>
 		<?php

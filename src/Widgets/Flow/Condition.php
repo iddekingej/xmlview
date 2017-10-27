@@ -11,13 +11,8 @@ use XMLView\Base\SubList;
  * When conditionValue==true: HTML is generated from the sub elements 
  *                      false: No html or js is generated.
  */
-class Condition extends Widget{
-    use SubList
-    {
-        getJs as private getJsTrait;
-        getCss as private getCssTrait;
-    }
-    
+class Condition extends FlowWidget{
+   
     private $conditionValue;
     
     /**

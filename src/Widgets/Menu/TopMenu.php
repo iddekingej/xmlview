@@ -8,6 +8,7 @@ use XMLView\Widgets\Base\WrongWidgetTypeException;
 use XMLView\Widgets\Base\HtmlComponent;
 use XMLView\Base\SubList;
 use XMLView\Engine\Data\DynamicStaticValue;
+use XMLView\Widgets\Flow\FlowWidget;
 
 /**
  * 
@@ -34,7 +35,7 @@ class TopMenu extends Widget
      */
      function validateSubItem(HtmlComponent $p_compontent):void
      {
-         if(!$p_compontent instanceof TopMenuItemBase){
+         if(!$p_compontent instanceof TopMenuItemBase && !$p_compontent instanceof FlowWidget){
              throw new WrongWidgetTypeException(TopMenuItemBase::class, $p_compontent) ;
          }
      }
