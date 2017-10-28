@@ -64,12 +64,14 @@ class ResourceView extends Base
      * @return string
      */
     function getContent():string
-    {
-        
-        ob_start();
-        $this->display();
-        $l_content=ob_get_contents();
-        ob_clean();        
+    {       
+        try{
+            ob_start();
+            $this->display();
+            $l_content=ob_get_contents();        
+        } finally {          
+            ob_end_clean();
+        }
         return $l_content;
         
     }
