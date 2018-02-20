@@ -138,7 +138,7 @@ class Theme
 
     function iconTextRouteLink($p_route,array $p_params,$p_image,$p_text):void
     {
-        ?><a href="<?=$this->e(Route($p_route,$p_params))?>"><img src="<?=$this->e($p_image)?>" /></a><a href="<?=$this->e(Route($p_route,$p_params))?>"><?=$this->e($p_text)?></a><?php
+        ?><a href="<?=$this->e(Route($p_route,$p_params))?>"><img style='vertical-align:middle'  src="<?=$this->e($p_image)?>" /><?=$this->e($p_text)?></a><?php
     }
     
     

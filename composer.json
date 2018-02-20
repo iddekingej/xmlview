@@ -1,8 +1,8 @@
 {
-	"name" : "elaya/xmlview"
-	,"autoload-dev" : {
+	"name" : "elaya/xmlview",
+	"autoload-dev" : {
 		"psr-4" : {
 			"XMLView" : "src/"
 		}
-	},
+	}
 }

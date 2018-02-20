@@ -47,7 +47,7 @@ class TopMenu extends Widget
      */
     function displayContent(DataStore $p_store):void
     {
-        if($this->subItems){
+        if($this->subItems){            
             $this->theme->menu_TopMenu->topMenuHeader();
             $this->displaySub($p_store);
            $this->theme->menu_TopMenu->topMenuFooter();

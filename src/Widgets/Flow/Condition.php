@@ -3,9 +3,8 @@ declare(strict_types=1);
 namespace XMLView\Widgets\Flow;
 
 use XMLView\Engine\Data\DynamicValue;
-use XMLView\Widgets\Base\Widget;
 use XMLView\Engine\Data\DataStore;
-use XMLView\Base\SubList;
+
 
 /**
  * When conditionValue==true: HTML is generated from the sub elements 
